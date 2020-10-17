@@ -11,7 +11,7 @@
 .rounded-rectangle {
     border-style: solid;
     display: inline-block;
-    border-radius: 10%;
+    border-radius: 20%;
     border-width: 3px;
     border-color: #808080;
 }
