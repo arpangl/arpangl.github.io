@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script language="JavaScript">
+        function ShowTime(){
+        　var NowDate=new Date();
+        　var h=NowDate.getHours();
+        　var m=NowDate.getMinutes();
+            if (m < 10) {
+                document.getElementById('showbox').innerHTML = h+':0'+m;
+            } else {
+                document.getElementById('showbox').innerHTML = h+':'+m;
+            }
+        　
+        　setTimeout('ShowTime()',60000);
+        }
+        </script>
+    <script>
+    
+        let batteryPromise = navigator.getBattery();
+        batteryPromise.then(batteryCallback);
+        
+        function batteryCallback(batteryObject) {
+           printBatteryStatus(batteryObject);
+        }
+        function printBatteryStatus(batteryObject) {
+            document.getElementById('battery').innerHTML = batteryObject.level*100+"%";
+        }</script>
+</head>
+<body onload="ShowTime() ">
+    <font class="font carrier">No Carrier</font>
+    <div id="showbox" class="font clock"></div>
+    <div id="battery" class="font battery">%</div>
+    <img src="./Desktop.png" class="desktop">
+    <img src="./Desktop1.png" class="desktop1">
+
+    <a href="https://fb.me"><img src="./App Icons/Facebook.png" class="icon Facebook"></a>
+    <font class='font FacebookFont'>Facebook</font>
+    
+    
+    <a href="https://www.cathaybk.com.tw/cathaybk/"><img src="./App Icons/Cathay.png" class="icon Cathay"></a>
+    <font class='font CathayFont'>國泰世華</font>
+
+    <a href="https://messenger.com"><img src="./App Icons/Messenger.png" class="icon Messenger"></a>
+    <font class='font MessengerFont'>Messenger</font>
+
+    <a href="https://instagram.com"><img src="./App Icons/Instagram.png" class="icon Instagram"></a>
+    <font class='font InstagramFont'>Instagram</font>
+
+    <a href="https://twitter.com" class=""><img src="./App Icons/Twitter.png" class="icon Twitter"></a>
+    <font class='font TwitterFont'>Twitter</font>
+    
+    <a href="https://maps.google.com" class=""><img src="./App Icons/Gmaps.png" class="icon Gmaps"></a>
+    <font class='font GmapsFont'>Google Maps</font>
+
+    <a href="https://www.sleepcycle.com/" class=""><img src="./App Icons/Sleep Cycle.png" class="icon SC"></a>
+    <font class='font SCFont'>Sleep Cycle</font>
+
+    <a href="https://quizlet.com"><img src="./App Icons/Quizlet.png" class="icon Quizlet"></a>
+    <font class='font QuizletFont'>Quizlet</font>
+
+    <a href="https://ceiba.ntu.edu.tw" class=""><img src="./App Icons/Ceiba.png" class="icon Ceiba"></a>
+    <font class='font CeibaFont'>NTU CEIBA</font>
+
+    <a href="tel:02 3366 3366" class=""><img src="./App Icons/Dialer.png" alt="" class="icon Dialer"></a>
+    
+    <a href="https://www.apple.com/tw/safari/" class=""><img src="./App Icons/Safari.png" alt="" class="icon Safari"></a>
+    
+    <img src="./App Icons/iMessenge.png" alt="" class="icon iMessage">
+    <a href="mailto:b07209032@ntu.edu.tw" class=""><img src="./App Icons/Outlook.png" alt="" class="icon Outlook"></a>
+    
+</body>
+</html>

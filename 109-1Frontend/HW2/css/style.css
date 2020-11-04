@@ -1,0 +1,165 @@
+@font-face {
+    font-family: MySF;
+    src: url(../SF-Pro.ttf) format("opentype");
+  }
+
+.desktop{
+    width: auto;
+    height: auto;
+    max-width: 600px;
+    max-height: 900px;
+    position: absolute;
+    top:0px;
+    left: 0px;
+    z-index: -1;
+}
+
+.desktop1{
+    width: auto;
+    max-width: 380px;
+    position: absolute;
+    top: 106px;
+    left: 51px;
+    z-index: 0;
+}
+.font{
+    font-family: MySF,sans-serif;
+    font-style: normal;
+    color: white;
+    position: absolute;
+    z-index: 1;
+}
+.clock{
+    position: absolute;
+    z-index: 1;
+    top: 109px;
+    font-size: 14px;
+    left: 225px;
+}
+.carrier{
+    position: absolute;
+    z-index: 1;
+    top: 109px;
+    font-size: 14px;
+    left: 58px;
+}
+.battery{
+    position: absolute;
+    z-index: 1;
+    top: 109px;
+    font-size: 14px;
+    left: 392px;
+}
+.icon{
+    border-radius: 14px;
+    width: auto;
+    max-width: 62px;
+    position: absolute;
+    z-index: 1;
+}
+
+.Facebook{
+    top: 136px;
+    left: 78px;
+}
+.FacebookFont{
+    top: 202px;
+    left: 81px;
+    font-size: 13px;
+}
+
+.Cathay{
+    top: 136px;
+    left: 166px;
+}
+.CathayFont{
+    top: 202px;
+    left: 171px;
+    font-size: 13px;
+}
+
+.Messenger{
+    top: 136px;
+    left: 254px;
+}
+.MessengerFont{
+    top: 202px;
+    left: 254px;
+    font-size: 13px;
+
+}
+
+.Instagram{
+    top: 136px;
+    left: 342px;
+}
+.InstagramFont{
+    top: 202px;
+    left: 345px;
+    font-size: 13px;
+}
+
+.Twitter{
+    top: 225px;
+    left:78px;
+}
+.TwitterFont{
+    top: 291px;
+    left: 90px;
+    font-size: 13px;
+}
+
+.Gmaps{
+    top: 225px;
+    left:166px;
+}
+.GmapsFont{
+    top: 291px;
+    left: 161px;
+    font-size: 13px;
+}
+
+.SC{
+    top: 225px;
+    left:254px;
+}
+.SCFont{
+    top: 291px;
+    left: 253px;
+    font-size: 13px;
+}
+
+.Quizlet{
+    top: 225px;
+    left:342px;
+}
+.QuizletFont{
+    top: 291px;
+    left: 354px;
+    font-size: 13px;
+}
+.Ceiba{
+    top: 314px;
+    left:78px;
+}
+.CeibaFont{
+    top: 380px;
+    left: 77px;
+    font-size: 13px;
+}
+.Dialer{
+    top: 704px;
+    left:78px;
+}
+.Safari{
+    top:704px;
+    left: 166px;
+}
+.iMessage{
+    top:704px;
+    left: 254px;
+}
+.Outlook{
+    top:704px;
+    left: 342px;
+}
