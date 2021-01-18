@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Online</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <script src="script/jquery-3.5.1.min.js"></script>
+    
+    
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body class="background">
+    
+
+    <div class="banner">
+        <div class="subbanner">
+            <a href="/" class="name">
+                <img src="images/bann-icon.png" class="logo">
+                Pomodoro Online
+            </a>
+        </div>
+    </div>
+
+    <div>
+        <div class="main-area">
+            <div class="blank-block1"></div>
+
+            <div class="counting-area">
+                <div id="crntWork" class="work-notification">
+                    Currtent Work!
+                </div>
+                <div id="timer" class="timer">
+                    25:00
+                </div>
+                <div class="countbtn">
+                    <button id ="cntBtn" class="cntBtn">
+                        START!
+                    </button>
+                </div>
+
+            </div>
+            <div class="label-area">
+                <button id='workbtn' class='workbtn'>Work</button>
+                <button id='breakbtn' class='breakbtn'>Break</button>
+            </div>
+
+            <div class="sign-area">
+                <button id="authorize_button" class="butIn">Sign In with Google</button>
+                <button id="signout_button" class="but">Log Out</button>
+            </div>
+            
+            <div class="select-area">
+                <div class="sel1">
+                    <a3>Choose a work: </a3>
+                    <select class="select1" id="select1">
+                        <option value="-1"></option>
+                    </select>
+                </div>
+                <div class="sel2">
+                    <a3>How much tomatos it cost: </a3>
+                    <select class="select2" id="select2">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                
+            </div>
+        </div>
+        <div class="exp-area">
+            <h3 style="
+            margin-left: 20px;
+        ">What is "Sign In with Google"? </h3>
+            <p style="
+            margin-left: 20px;
+        ">To Sign In with Google, You can import your today's to-do stuffs from Google Calendar to help you focus.</p>
+        </div>
+    </div>
+
+    <pre id="content" style="white-space: pre-wrap;"></pre>
+</body>
+<script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+
+<script src="script/basic.js"></script>
+</html>

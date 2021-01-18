@@ -1,0 +1,248 @@
+@font-face {
+    font-family: 'ArialRounded';
+    font-display: swap;
+    src: url('../fonts/Arial_Rounded_MT.ttf')
+      format('truetype');
+  }
+@font-face {
+    font-family: 'ArialRounded';
+    font-display: swap;
+    src: url('../fonts/Arial-Rounded-MT-Bold.ttf')
+      format('truetype');
+    font-weight: bold;
+}
+@font-face {
+    font-family: MySF;
+    src: url(../fonts/SF-Pro.ttf) format("opentype");
+  }
+
+a3{
+    font-family:'ArialRounded';
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.background{
+    background-color:rgb(255, 160, 0);
+    font-family: 'ArialRounded';
+}
+
+.banner{
+    padding: 0px 12px;
+    max-width: 800px;
+    margin: auto;
+}
+.subanner{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.logo{
+    max-height: 30px;
+    max-width: 30px;
+    margin-right: 0px;
+    margin-left: 12px;
+    margin-top: 15px;
+}
+
+.main-area{
+    padding: 0px 12px;
+    max-width: 800px;
+    margin: auto;
+    padding: 0px;
+}
+.blank-block1{
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 1px;
+    margin-bottom: 40px;
+}
+.counting-area{
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 20px 0px 17px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    width: 90%;
+    margin: auto;
+}
+
+.name{
+    margin: 0;
+    font-family: 'ArialRounded', -apple-system, BlinkMacSystemFont,
+      'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  
+    font-weight: bold;
+    line-height: 60px;
+    display: inline-block;
+    text-decoration:none;
+    color:white;
+    max-height: 60px;
+    font-size:30px;
+
+}
+
+.timer{
+    font-size: 120px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+    color: white;
+    
+}
+
+.work-notification{
+    display: none;
+    font-family: 'ArialRounded';
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    color: #3e2929;
+
+}
+.but{
+    margin: auto;
+}
+
+
+.label-area{
+    height: 45px;
+    width: 330px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.workbtn{
+    border-width: 0px;
+    margin: auto;
+    width: 49%;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 0.4);
+    color: darkslateblue;
+    font-family: 'ArialRounded';
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.breakbtn{
+    border-width: 0px;
+    margin: auto;
+    width: 49%;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 0.4);
+    color: lightseagreen;
+    font-family: 'ArialRounded';
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.sign-area{
+    height: 45px;
+    width: 800px;
+    margin: auto;
+    margin-top: 17px;
+}
+
+.butIn{
+    border-width: 0px;
+    margin: auto;
+    width: 48%;
+    height: 35px;
+    background-color: rgba(66, 133, 244, 1);
+    color: rgba(255,255,255,1);
+    font-family: MySF;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.but{
+    border-width: 0px;
+    margin: auto;
+    width: 48%;
+    height: 35px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgba(0,0,0,0.5);
+    font-family: MySF;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.countbtn{
+    border-width: 0px;
+    margin-top: 20px;
+    text-align: center;
+    color: white;
+
+}
+
+.cntBtn{
+    border-width: 0px;
+    margin: auto;
+    width: 46%;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 1);
+    color:red;
+    cursor: pointer;
+    font-family: 'ArialRounded';
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+.select-area{
+    
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 20px 0px 17px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    width: 90%;
+    margin: auto;
+}
+.select1{
+    font: Bold 16px MySF;
+    border-width: 0px;
+    border-radius: 3px;
+    color: black;
+    margin-left: 20px;
+    width: 450px;
+    height: 40px;
+    background-color: rgba(255,255,255,0.8);
+}
+.select2{
+    font: Bold 16px MySF;
+    border-width: 0px;
+    border-radius: 3px;
+    color: black;
+    margin-left: 20px;
+    width: 80px;
+    height: 40px;
+    background-color: rgba(255,255,255,0.8);
+}
+.sel1{
+    margin: 16px;
+}
+.sel2{
+    margin-top: 16px;
+    margin: 16px;
+    border-top: 12px;
+}
+
+.exp-area{
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 20px 0px 17px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    width: 720px;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto
+}
