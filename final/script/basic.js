@@ -183,6 +183,7 @@ function Timer(){
             timeString = calTime();
             $('#timer').text(timeString);
             if (crntTime == 0){
+                notify();
                 if (isMoreT == 1 && remainTom > 1){
                     remainTom -= 1;
                     Timer();
@@ -208,3 +209,16 @@ $('#breakbtn').click(function(){
     $('#timer').text(timeString);
 });
 
+function notify(){
+  var step = 0;
+  var timer = setInterval( function() {
+    if (step%2 == 1) {document.title('Times Up!')};
+    if (step%2 == 0) {document.title('')};
+    if (step == 5){
+      clearInterval(timer);
+      document.title('Pomodoro Online');
+    }
+  }
+  ,1000);
+
+};
