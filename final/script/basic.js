@@ -165,6 +165,22 @@ function btnClicked(){
     }
 };
 
+function notify(){
+  var step = 0;
+  var timer = setInterval( function() {
+    
+    if (step%2 == 1) {document.title = "Time's up!"};
+    if (step%2 == 0) {document.title = ""};
+    if (step == 8){
+      clearInterval(timer);
+      document.title('Pomodoro Online');
+    };
+    step++;
+  }
+  ,1000);
+
+};
+
 function calTime(){
     min = Math.floor(crntTime / 60);
     sec = crntTime % 60;
@@ -199,26 +215,13 @@ function Timer(){
 }
 
 $('#workbtn').click(function(){
-    crntTime = 1500;
+    crntTime = workTime;
     timeString = calTime();
     $('#timer').text(timeString);
 });
 $('#breakbtn').click(function(){
-    crntTime = 300;
+    crntTime = breakTime;
     timeString = calTime();
     $('#timer').text(timeString);
 });
 
-function notify(){
-  var step = 0;
-  var timer = setInterval( function() {
-    if (step%2 == 1) {document.title('Times Up!')};
-    if (step%2 == 0) {document.title('')};
-    if (step == 5){
-      clearInterval(timer);
-      document.title('Pomodoro Online');
-    }
-  }
-  ,1000);
-
-};
