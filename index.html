@@ -1,0 +1,1412 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<title>Lambert Yang · Garmin 實習年終報告</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="deck-stage.js"></script>
+<script src="wordcloud2.min.js"></script>
+<style>
+  :root{
+    --bg:        #F3ECE0;
+    --bg-2:      #EBE1D1;
+    --bg-3:      #E3D6BF;
+    --bg-dark:   #2A2520;
+    --ink:       #1F1B17;
+    --ink-2:     #5B5249;
+    --ink-3:     #9A8F82;
+    --rule:      #D6CABA;
+    --accent:    #B4563A;
+    --accent-2:  #C78E5C;
+    --ok:        #6B7F4A;
+  }
+  html, body { margin:0; padding:0; background:#0e0e0e; color:var(--ink); }
+  deck-stage { font-family: 'Inter', 'Noto Sans TC', system-ui, sans-serif; }
+  deck-stage section {
+    background: var(--bg); color: var(--ink);
+    position: relative; overflow: hidden;
+  }
+
+  .mono { font-family:'JetBrains Mono', ui-monospace, monospace; }
+  .tc   { font-family:'Noto Sans TC','Inter',sans-serif; }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 18px; letter-spacing:.14em; text-transform:uppercase; color: var(--ink-2);
+  }
+  .rule { height:1px; background: var(--rule); width:100%; }
+
+  .chrome{
+    position:absolute; inset:0; pointer-events:none;
+    display:grid; grid-template-rows: 56px 1fr 56px;
+    padding: 40px 64px; box-sizing:border-box;
+  }
+  .chrome-top, .chrome-bot{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:.1em;
+    color:var(--ink-3); text-transform:uppercase;
+  }
+  .wordmark{ display:flex; align-items:center; gap:10px; color:var(--ink); font-weight:500; }
+
+  .slide{
+    position:absolute; inset:0; padding: 120px 112px 96px; box-sizing:border-box;
+    display:flex; flex-direction:column;
+  }
+
+  /* ---------- COVER ---------- */
+  .cover .slide{ justify-content:flex-end; padding-bottom: 112px; }
+  .cover h1{
+    font-family:'Noto Sans TC','Inter',sans-serif;
+    font-weight:600; font-size: 140px; letter-spacing:-0.02em; line-height:1.0;
+    margin:0;
+  }
+  .cover h1 em{ font-style:normal; color:var(--accent); }
+  .cover .sub{ margin-top: 28px; font-size: 30px; color:var(--ink-2); max-width: 820px; line-height:1.5; }
+  .cover .meta{
+    position:absolute; top: 112px; left: 112px; right: 112px;
+    display:flex; justify-content:space-between; align-items:flex-start;
+  }
+  .cover .title-en{
+    font-family:'JetBrains Mono',monospace; font-size: 15px; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--ink-2);
+  }
+  .cover .hero-art{
+    position:absolute; right: 112px; top: 170px; width: 560px; height: 560px;
+  }
+
+  /* ---------- AGENDA ---------- */
+  .agenda .slide{ display:grid; grid-template-columns: 360px 1fr; gap: 80px; }
+  .agenda h2{
+    font-family:'Noto Sans TC','Inter',sans-serif;
+    font-weight:600; font-size: 56px; line-height:1.08; margin:0; letter-spacing:-0.01em;
+  }
+  .agenda .left .tag{ margin-bottom: 24px; }
+  .agenda ol{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  .agenda li{
+    display:grid; grid-template-columns: 80px 1fr 40px;
+    align-items:center; gap: 32px;
+    padding: 26px 0; border-top: 1px solid var(--rule);
+    transition: transform .4s ease, color .3s ease;
+  }
+  .agenda li:last-child{ border-bottom: 1px solid var(--rule); }
+  .agenda li .n{ font-family:'JetBrains Mono',monospace; color:var(--ink-3); font-size:17px; }
+  .agenda li .t{ font-family:'Noto Sans TC','Inter',sans-serif; font-weight:500; font-size: 30px; }
+  .agenda li .t small{ display:block; font-family:'Inter',sans-serif; font-weight:400; font-size:22px; color:var(--ink-2); margin-top:6px; }
+  .agenda li .d{ color:var(--ink-3); font-family:'JetBrains Mono',monospace; font-size:18px; text-align:right; }
+
+  /* ---------- ABOUT ME ---------- */
+  .about .slide{ display:grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items:center; }
+  .about h2{ font-family:'Noto Sans TC'; font-weight:600; font-size: 88px; line-height:1.05; margin:0 0 24px 0; letter-spacing:-0.02em; }
+  .about h2 em{ font-style:normal; color:var(--accent); }
+  .about .meta-grid{
+    margin-top: 48px; display:grid; grid-template-columns: repeat(2,1fr); gap: 28px 48px;
+    padding-top: 28px; border-top:1px solid var(--rule); max-width: 720px;
+  }
+  .about .meta-grid .k{ font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color: var(--ink-3); margin-bottom:8px;}
+  .about .meta-grid .v{ font-size: 24px; color:var(--ink); font-weight:500;}
+  .about .port{
+    aspect-ratio: 4/5; width:100%; max-width: 480px; background: var(--bg-2); border:1px solid var(--rule);
+    border-radius: 4px; justify-self:end; position:relative; display:flex; align-items:center; justify-content:center;
+  }
+  .about .port .corner-tag{ position:absolute; top:20px; left:20px; font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); }
+  .about .port .corner-tag-r{ position:absolute; bottom:20px; right:20px; font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); }
+
+  /* ---------- TWO-PILLAR ---------- */
+  .pillars .slide{ padding-top: 120px; }
+  .pillars h2{ font-family:'Noto Sans TC'; font-weight:600; font-size: 64px; margin:0 0 12px 0; letter-spacing:-0.01em;}
+  .pillars .lead{ font-size: 30px; color: var(--ink-2); max-width: none; margin-bottom: 48px; line-height:1.5;}
+  .pillars .grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 40px; flex:1; }
+  .pillars .card{
+    background: var(--bg-2); border:1px solid var(--rule); border-radius:6px;
+    padding: 44px 44px 40px; position:relative; display:flex; flex-direction:column;
+  }
+  .pillars .card .tag{ font-family:'JetBrains Mono',monospace; font-size:16px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin-bottom: 12px;}
+  .pillars .card h3{ font-family:'Noto Sans TC'; font-weight:600; font-size: 52px; margin:0 0 14px 0; letter-spacing:-0.01em;}
+  .pillars .card .en{ font-family:'JetBrains Mono',monospace; font-size:18px; color:var(--ink-3); letter-spacing:.08em; margin-bottom:22px;}
+  .pillars .card p{ font-size: 24px; line-height:1.55; color: var(--ink-2); margin:0; max-width: none; }
+  .pillars .card .icon{ position:absolute; top: 36px; right: 36px; width: 120px; height: 120px;}
+  .pillars .card ul{ margin-top: auto; padding-top: 24px; list-style:none; padding-left:0; display:flex; flex-direction:column; gap: 12px; }
+  .pillars .card li{ font-size: 24px; color:var(--ink); display:flex; gap:12px; align-items:baseline; line-height:1.45; }
+  .pillars .card li::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--accent); display:inline-block; flex-shrink:0; transform: translateY(-2px);}
+
+  /* ---------- SERVICE GRID ---------- */
+  .services .slide{ padding-top: 120px; }
+  .services h2{ font-family:'Noto Sans TC'; font-weight:600; font-size: 56px; margin:0 0 12px 0; letter-spacing:-0.01em;}
+  .services .lead{ font-size: 30px; color:var(--ink-2); max-width: 960px; margin-bottom: 48px; line-height:1.5;}
+  .services .grid{
+    display:grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);
+    gap: 20px; flex:1;
+  }
+  .services .cell{
+    background: var(--bg-2); border:1px solid var(--rule); border-radius:4px;
+    padding: 32px; position:relative; display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .services .cell .cat{ font-family:'JetBrains Mono',monospace; font-size:16px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);}
+  .services .cell.safety .cat{ color:var(--accent); }
+  .services .cell.ops .cat{ color: var(--ok); }
+  .services .cell h4{ font-family:'Noto Sans TC'; font-weight:600; font-size: 30px; margin: 10px 0 8px 0; letter-spacing:-0.005em;}
+  .services .cell p{ font-size: 23px; color:var(--ink-2); line-height:1.5; margin:0; max-width: 360px;}
+  .services .cell .icon{ width: 90px; height: 90px; margin-top: auto; align-self:flex-end; }
+  .services .cell .num{ position:absolute; bottom: 20px; left: 32px; font-family:'JetBrains Mono',monospace; font-size:16px; color:var(--ink-3); letter-spacing:.16em;}
+
+  /* ---------- YOLO EXPLAINER ---------- */
+  .yolo .slide{ display:grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items:center; }
+  .yolo h2{ font-family:'Noto Sans TC'; font-weight:600; font-size: 72px; line-height:1.05; margin:0 0 24px 0; letter-spacing:-0.015em;}
+  .yolo h2 em{ font-style:normal; color:var(--accent); }
+  .yolo p{ font-size: 21px; line-height:1.6; color:var(--ink-2); margin:0 0 18px 0; max-width: 580px; }
+  .yolo .steps{ margin-top: 32px; display:flex; flex-direction:column; gap:14px;}
+  .yolo .step{ display:grid; grid-template-columns: 28px 1fr; gap:16px; align-items:baseline; font-size:23px; color:var(--ink); line-height:1.5;}
+  .yolo .step .n{ font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:18px;}
+  .yolo .diagram{
+    background: var(--bg-2); border:1px solid var(--rule); border-radius:4px;
+    aspect-ratio: 1/1; width: 100%; max-width: 560px; justify-self:end; position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .yolo .diagram .tag{ position:absolute; top:20px; left:20px; font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);}
+  .yolo .diagram .tag-r{ position:absolute; bottom:20px; right:20px; font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);}
+
+  /* ---------- PIPELINE ---------- */
+  .pipeline .slide{ padding-top: 120px; }
+  .pipeline h2{ font-family:'Noto Sans TC'; font-weight:600; font-size: 56px; margin:0 0 12px 0; letter-spacing:-0.01em;}
+  .pipeline .lead{ font-size: 30px; color:var(--ink-2); max-width: none; margin-bottom: 48px; line-height:1.5;}
+  .pipeline .flow{
+    display:grid; grid-template-columns: repeat(5, 1fr); gap: 14px; align-items:stretch;
+    flex:1; max-height: 440px;
+  }
+  .pipeline .node{
+    background: var(--bg-2); border:1px solid var(--rule); border-radius:6px;
+    padding: 28px; display:flex; flex-direction:column; justify-content:space-between; position:relative;
+  }
+  .pipeline .node .i{ width: 52px; height: 52px; margin-bottom: 24px; }
+  .pipeline .node .lbl{ font-family:'JetBrains Mono',monospace; font-size:16px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); margin-bottom:6px;}
+  .pipeline .node h4{ font-family:'Noto Sans TC'; font-weight:600; font-size: 34px; margin: 0 0 10px 0;}
+  .pipeline .node p{ font-size: 26px; color:var(--ink-2); line-height:1.5; margin:0;}
+  .pipeline .node::after{
+    content:""; position:absolute; right:-14px; top:50%; width: 14px; height: 1px; background: var(--ink-3); z-index:2;
+  }
+  .pipeline .node:last-child::after{ display:none; }
+  .pipeline .node::before{
+    content:""; position:absolute; right:-18px; top:calc(50% - 4px); width:0; height:0;
+    border-left: 6px solid var(--ink-3); border-top: 4px solid transparent; border-bottom: 4px solid transparent; z-index:2;
+  }
+  .pipeline .node:last-child::before{ display:none; }
+
+  /* ---------- SECTION DIVIDER ---------- */
+  .divider{ background: var(--bg-dark); color: #F3ECE0; }
+  .divider .slide{ justify-content:center; }
+  .divider .chrome-top, .divider .chrome-bot{ color: rgba(243,236,224,0.5); }
+  .divider .wordmark{ color:#F3ECE0; }
+  .divider .section-num{ font-family:'JetBrains Mono',monospace; font-size: 17px; letter-spacing:.24em; color: var(--accent-2); margin-bottom: 32px;}
+  .divider h2{
+    font-family:'Noto Sans TC'; font-weight:500; font-size: 104px; line-height: 1.04; margin:0; letter-spacing:-0.02em; max-width: 1300px;
+  }
+  .divider h2 em{ font-style:normal; color: var(--accent-2); }
+  .divider .big-arc{
+    position:absolute; right:-180px; bottom:-180px; width: 720px; height: 720px;
+    border-radius:50%; border: 1px solid rgba(243,236,224,0.18);
+  }
+  .divider .big-arc::before{ content:""; position:absolute; inset: 80px; border-radius:50%; border:1px solid rgba(243,236,224,0.12);}
+  .divider .big-arc::after{ content:""; position:absolute; inset: 180px; border-radius:50%; background: var(--accent); opacity:.9;}
+
+  /* ---------- BEFORE / AFTER TABLE ---------- */
+  .compare .slide{ padding-top: 100px; padding-bottom: 80px; }
+  .compare h2{ font-family:'Noto Sans TC'; font-weight:600; font-size: 48px; margin:0 0 10px 0; letter-spacing:-0.01em; line-height:1.08;}
+  .compare .lead{ font-size: 30px; color:var(--ink-2); max-width: 960px; margin-bottom: 28px; line-height:1.5;}
+  .compare .table{
+    display:grid; grid-template-columns: 140px 1fr 1fr; gap: 0;
+    border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+  }
+  .compare .table .h{
+    padding: 14px 20px; font-family:'JetBrains Mono',monospace;
+    font-size:16px; letter-spacing:.16em; text-transform:uppercase;
+    border-bottom: 1px solid var(--ink); background: var(--ink); color: var(--bg);
+  }
+  .compare .table .h.light{ background: var(--bg-2); color: var(--ink-2);}
+  .compare .table .row{
+    display:contents;
+  }
+  .compare .table .c{
+    padding: 14px 20px; border-bottom: 1px solid var(--rule); font-size: 19px; line-height:1.5;
+    display:flex; flex-direction:column; gap:4px;
+  }
+  .compare .table .c.stage{ background: var(--bg-2); font-family:'Noto Sans TC'; font-weight:600; font-size: 22px; color: var(--ink); justify-content:center;}
+  .compare .table .c.before{ color: var(--ink-2); }
+  .compare .table .c.after{ color: var(--ink); background: #FBF6ED; border-left: 3px solid var(--accent);}
+  .compare .table .c .save{ font-family:'JetBrains Mono',monospace; font-size: 16px; color: var(--accent); letter-spacing:.08em; margin-top:4px;}
+  .compare .table .row:last-child .c{ border-bottom: none; }
+
+  /* ---------- KEY BREAKTHROUGH ---------- */
+  .break .slide{ padding-top: 120px; display:grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items:center; }
+  .break h2{ font-family:'Noto Sans TC'; font-weight:600; font-size: 72px; line-height:1.04; margin:0 0 24px 0; letter-spacing:-0.015em;}
+  .break h2 em{ font-style:normal; color:var(--accent); }
+  .break p{ font-size: 30px; color:var(--ink-2); line-height:1.55; max-width: 600px; margin:0 0 14px 0;}
+  .break .stat-row{ display:flex; gap: 48px; margin-top: 44px;}
+  .break .stat .big{ font-family:'Noto Sans TC','Inter',sans-serif; font-weight:600; font-size: 108px; letter-spacing:-0.03em; line-height:.95; color:var(--accent);}
+  .break .stat .k{ font-family:'JetBrains Mono',monospace; font-size:16px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); margin-top:10px;}
+  .break .stat .v{ font-family:'Noto Sans TC'; font-weight:500; font-size: 24px; color:var(--ink); margin-top:4px; max-width: 280px; line-height:1.45;}
+  .break .illo{
+    aspect-ratio: 1/1; width: 100%; max-width: 520px; justify-self:end;
+    background: var(--bg-2); border:1px solid var(--rule); border-radius:4px; position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .break .illo .tag{ position:absolute; top:20px; left:20px; font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);}
+
+  /* ---------- HERO STAT (P07) ---------- */
+  .hero-stat .slide{
+    padding: 100px 112px 96px; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; text-align:center; gap: 0;
+  }
+  .hero-stat .eyebrow{ display:block; margin-bottom: 16px; }
+  .hero-stat h2{ font-family:'Noto Sans TC'; font-weight:600; font-size: 56px; line-height:1.15; margin:0 0 14px 0; letter-spacing:-0.01em;}
+  .hero-stat h2 em{ font-style:normal; color:var(--accent); }
+  .hero-stat p{ font-size: 30px; color:var(--ink-2); line-height:1.5; max-width: 820px; margin:0; text-align:center;}
+  .hero-stat .big-num{
+    font-family:'JetBrains Mono',monospace; font-size: 240px; font-weight:700; line-height:.85;
+    color:var(--accent); margin: 36px 0 8px 0; letter-spacing:-0.04em;
+  }
+  .hero-stat .big-num span{ font-size: 140px; }
+  .hero-stat .big-label{
+    font-family:'JetBrains Mono',monospace; font-size:18px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--ink-3); margin-bottom: 44px;
+  }
+  .hero-stat .compare-row{
+    display:flex; gap:80px; align-items:center; justify-content:center;
+    padding: 40px 80px; background:var(--bg-2); border:1px solid var(--rule); border-radius:8px;
+    min-width: 760px;
+  }
+  .hero-stat .compare-row .side{ text-align:center; }
+  .hero-stat .compare-row .side .num{
+    font-family:'JetBrains Mono',monospace; font-size:60px; font-weight:700; line-height:1;
+  }
+  .hero-stat .compare-row .side .lbl{
+    font-family:'JetBrains Mono',monospace; font-size:15px; letter-spacing:.18em;
+    text-transform:uppercase; margin-top:10px; color:var(--ink-3);
+  }
+  .hero-stat .compare-row .side .detail{
+    font-size:20px; color:var(--ink-2); margin-top:12px; line-height:1.45;
+  }
+  .hero-stat .compare-row .arrow-col svg{ display:block; }
+
+  /* ---------- TRIO CARDS (P08) ---------- */
+  .trio .slide{ padding-top: 110px; display:flex; flex-direction:column; }
+  .trio h2{ font-family:'Noto Sans TC'; font-weight:600; font-size: 64px; line-height:1.08; margin:0 0 12px 0; letter-spacing:-0.015em;}
+  .trio h2 em{ font-style:normal; color:var(--accent); }
+  .trio .lead{ font-size: 30px; color:var(--ink-2); max-width: 960px; margin-bottom: 56px; line-height:1.5;}
+  .trio .card-row{ display:grid; grid-template-columns: repeat(3,1fr); gap:24px; flex:1; min-height: 0;}
+  .trio .tcard{
+    background:var(--bg-2); border:1px solid var(--rule); border-radius:6px;
+    padding: 48px 36px; display:flex; flex-direction:column; gap:18px; position:relative;
+  }
+  .trio .tcard .n{
+    font-family:'JetBrains Mono',monospace; font-size:80px; font-weight:700;
+    color:var(--rule); line-height:1; position:absolute; top:28px; right:32px;
+  }
+  .trio .tcard .cat{
+    font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--accent);
+  }
+  .trio .tcard h4{ font-family:'Noto Sans TC'; font-weight:600; font-size:38px; margin:0; color:var(--ink);}
+  .trio .tcard p{ font-size:22px; color:var(--ink-2); line-height:1.55; margin:0;}
+  .trio .tcard .models{
+    font-family:'JetBrains Mono',monospace; font-size:16px; color:var(--ink-3);
+    letter-spacing:.06em; margin-top:auto; padding-top:20px; border-top:1px solid var(--rule);
+  }
+
+  /* ---------- TRANSITION (P08) ---------- */
+  .transition .slide{
+    padding: 120px 112px 96px; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center;
+  }
+  .transition .eyebrow{ display:block; margin-bottom: 20px; }
+  .transition h2{
+    font-family:'Noto Sans TC'; font-weight:600; font-size: 64px; line-height:1.12;
+    margin:0 0 24px 0; letter-spacing:-0.015em; max-width: 900px;
+  }
+  .transition h2 em{ font-style:normal; color:var(--accent); }
+  .transition p{
+    font-size: 26px; color:var(--ink-2); line-height:1.55; max-width: 720px;
+    margin:0 0 48px 0; text-align:center;
+  }
+  .transition .hint-row{
+    display:flex; gap:48px; align-items:center; justify-content:center;
+  }
+  .transition .hint{
+    display:flex; align-items:center; gap:14px;
+    font-family:'JetBrains Mono',monospace; font-size:17px; letter-spacing:.08em;
+    color:var(--ink-3); text-transform:uppercase;
+  }
+  .transition .hint .dot{
+    width:10px; height:10px; border-radius:50%; background:var(--accent);
+  }
+
+  /* ---------- GARMINCLAW (P09) ---------- */
+  .gclaw .slide{
+    padding: 170px 112px 96px; display:flex; flex-direction:column; gap: 40px;
+  }
+  .gclaw .hero{
+    display:grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items:center;
+  }
+  .gclaw .hero-text h2{
+    font-family:'Noto Sans TC'; font-weight:600; font-size: 56px;
+    line-height:1.12; margin:0 0 18px 0; letter-spacing:-0.015em;
+  }
+  .gclaw .hero-text h2 em{ font-style:normal; color:var(--accent); }
+  .gclaw .hero-text p{ font-size: 30px; color:var(--ink-2); line-height:1.6; margin:0; max-width: 620px;}
+  .gclaw .hero-text p b{ color:var(--ink); font-weight:600;}
+  .gclaw .cycle{
+    aspect-ratio: 1/1; max-width: 320px; width:100%; justify-self:end;
+    background: var(--bg-2); border:1px solid var(--rule); border-radius:8px;
+    position:relative; display:flex; align-items:center; justify-content:center; padding: 24px;
+  }
+  .gclaw .cycle .tag{
+    position:absolute; top:16px; left:18px; font-family:'JetBrains Mono',monospace;
+    font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
+  }
+  .gclaw .more-label{
+    display:flex; align-items:center; gap:14px; margin-top: 8px;
+    font-family:'JetBrains Mono',monospace; font-size:30px; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--ink-3);
+  }
+  .gclaw .more-label::before{
+    content:""; width: 32px; height:1px; background: var(--ink-3);
+  }
+  .gclaw .more-label span{ color: var(--ink); font-weight:500;}
+  .gclaw .feat-row{ display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; }
+  .gclaw .fcard{
+    background:var(--bg-2); border:1px solid var(--rule); border-radius:6px;
+    padding: 28px 24px; display:flex; flex-direction:column; gap:10px;
+  }
+  .gclaw .fcard .fn{
+    font-family:'JetBrains Mono',monospace; font-size:26px; color:var(--accent);
+    letter-spacing:.12em;
+  }
+  .gclaw .fcard h5{ font-family:'Noto Sans TC'; font-weight:600; font-size:32px; margin:0; color:var(--ink);}
+  .gclaw .fcard .fd{ font-size:24px; color:var(--ink-2); line-height:1.45; margin:0;}
+
+  /* ---------- GALLERY (P10) ---------- */
+  .gallery .slide{ padding-top: 110px; display:flex; flex-direction:column;}
+  .gallery h2{ font-family:'Noto Sans TC'; font-weight:600; font-size: 56px; line-height:1.12; margin: 8px 0 12px 0; letter-spacing:-0.015em;}
+  .gallery h2 em{ font-style:normal; color:var(--accent); }
+  .gallery .lead{ font-size: 28px; color:var(--ink-2); max-width: none; margin-bottom: 44px; line-height:1.5;}
+  .gallery .shots{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 28px; flex:1; min-height:0;}
+  .gallery figure{ margin:0; display:flex; flex-direction:column; gap:16px;}
+  .gallery .shot{
+    flex:1; min-height:0; aspect-ratio: 16/10;
+    background: var(--bg-2); border:1px solid var(--rule); border-radius:8px;
+    position:relative; display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .gallery .shot img{ width:100%; height:100%; object-fit:cover; display:block;}
+  .gallery .shot .ph{
+    font-family:'JetBrains Mono',monospace; font-size:18px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--ink-3);
+  }
+  .gallery .shot .corner-tl{
+    position:absolute; top:10px; left:10px; font-family:'JetBrains Mono',monospace;
+    font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:#F3ECE0;
+    background: rgba(31,27,23,.78); padding: 5px 10px; border-radius: 4px;
+    backdrop-filter: blur(2px); z-index: 2;
+  }
+  .gallery .shot .corner-br{
+    position:absolute; bottom:10px; right:10px; font-family:'JetBrains Mono',monospace;
+    font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:#F3ECE0;
+    background: rgba(31,27,23,.78); padding: 5px 10px; border-radius: 4px;
+    backdrop-filter: blur(2px); z-index: 2;
+  }
+  .gallery figcaption{ display:flex; flex-direction:column; gap:6px; padding-left:2px; }
+  .gallery figcaption .num{
+    font-family:'JetBrains Mono',monospace; font-size:16px; letter-spacing:.18em;
+    color:var(--accent); text-transform:uppercase;
+  }
+  .gallery figcaption .ttl{ font-family:'Noto Sans TC'; font-weight:600; font-size:28px; color:var(--ink); letter-spacing:-0.005em;}
+  .gallery figcaption .desc{ font-size:18px; color:var(--ink-2); line-height:1.5;}
+
+  /* ---------- LEARNINGS ---------- */
+  .learn .slide{ padding-top: 120px; }
+  .learn h2{ font-family:'Noto Sans TC'; font-weight:600; font-size: 68px; margin:0 0 12px 0; letter-spacing:-0.015em;}
+  .learn .lead{ font-size: 30px; color:var(--ink-2); max-width: 960px; margin-bottom: 48px; line-height:1.5;}
+  .learn .wc-wrap{
+    flex:1; position:relative; min-height:0; max-height: 900px;
+    opacity:0; transition: opacity .8s ease .2s;
+  }
+  deck-stage section[data-deck-active].learn .wc-wrap{ opacity:1; }
+  .learn #wordcloud-canvas{ display:block; width:100%; height:100%; }
+
+  /* ---------- CLOSING ---------- */
+  .closing .slide{ justify-content: space-between; padding-bottom: 112px; }
+  .closing .big{
+    font-family:'Noto Sans TC'; font-weight:600; font-size: 168px; letter-spacing:-0.03em; line-height:.95; margin: 48px 0 0 0; color:var(--ink);
+  }
+  .closing .big em{ font-style:normal; color:var(--accent); }
+  .closing .sub{ font-size:30px; color:var(--ink-2); max-width: 760px; margin-top: 28px; line-height:1.5;}
+  .closing .foot{
+    display:grid; grid-template-columns: repeat(3,1fr); gap: 64px;
+    padding-top: 32px; border-top: 1px solid var(--rule);
+  }
+  .closing .foot .col .k{ font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); margin-bottom:10px;}
+  .closing .foot .col .v{ font-size: 26px; color:var(--ink); font-weight:500;}
+  .closing .orbit{ position:absolute; right:-200px; top:50%; transform:translateY(-50%); width:900px; height:900px;}
+
+  /* ---------- QA ---------- */
+  .qa{ background: var(--bg-dark); color:#F3ECE0; }
+  .qa .chrome-top, .qa .chrome-bot{ color: rgba(243,236,224,0.5);}
+  .qa .wordmark{ color:#F3ECE0; }
+  .qa .slide{ justify-content:center; align-items:flex-start; }
+  .qa .qmark{
+    font-family:'Noto Sans TC','Inter',sans-serif;
+    font-weight:500; font-size: 520px; line-height:.8; letter-spacing:-0.04em; color: var(--accent-2);
+    margin:0;
+  }
+  .qa .tag-row{ display:flex; justify-content:space-between; align-items:flex-end; width:100%; margin-top: 32px; }
+  .qa .tag-row .l{ font-family:'Noto Sans TC'; font-weight:500; font-size: 48px;}
+  .qa .tag-row .l small{ display:block; font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:.18em; color:rgba(243,236,224,.55); text-transform:uppercase; margin-top:12px;}
+  .qa .tag-row .r{ font-family:'JetBrains Mono',monospace; font-size:14px; color:rgba(243,236,224,.6); letter-spacing:.16em; text-transform:uppercase;}
+
+  /* ---------- Animated transitions ---------- */
+  deck-stage section{ opacity: 0; transition: opacity .55s ease; }
+  deck-stage section[data-deck-active]{ opacity: 1; }
+  deck-stage section .reveal{ opacity: 0; transform: translateY(14px);
+    transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);}
+  deck-stage section[data-deck-active] .reveal{ opacity:1; transform:none; }
+  deck-stage section .reveal.d1{ transition-delay:.14s }
+  deck-stage section .reveal.d2{ transition-delay:.24s }
+  deck-stage section .reveal.d3{ transition-delay:.34s }
+  deck-stage section .reveal.d4{ transition-delay:.44s }
+  deck-stage section .reveal.d5{ transition-delay:.54s }
+  deck-stage section .reveal.d6{ transition-delay:.64s }
+
+  .agenda li{ opacity:0; transform: translateX(-12px);
+    transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.2,1), color .3s ease; }
+  deck-stage section[data-deck-active].agenda li{ opacity:1; transform:none; }
+  .agenda li:nth-child(1){ transition-delay:.18s }
+  .agenda li:nth-child(2){ transition-delay:.24s }
+  .agenda li:nth-child(3){ transition-delay:.30s }
+  .agenda li:nth-child(4){ transition-delay:.36s }
+  .agenda li:nth-child(5){ transition-delay:.42s }
+  .agenda li:nth-child(6){ transition-delay:.48s }
+  .agenda li:hover{ transform: translateX(6px); }
+  .agenda li:hover .t{ color: var(--accent); }
+
+  .services .cell{ opacity:0; transform: translateY(14px);
+    transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.2,1);}
+  deck-stage section[data-deck-active].services .cell{ opacity:1; transform:none;}
+  .services .cell:nth-child(1){ transition-delay:.16s }
+  .services .cell:nth-child(2){ transition-delay:.22s }
+  .services .cell:nth-child(3){ transition-delay:.28s }
+  .services .cell:nth-child(4){ transition-delay:.34s }
+  .services .cell:nth-child(5){ transition-delay:.40s }
+  .services .cell:nth-child(6){ transition-delay:.46s }
+
+  .pipeline .node{ opacity:0; transform: translateY(14px);
+    transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.2,1);}
+  deck-stage section[data-deck-active].pipeline .node{ opacity:1; transform:none;}
+  .pipeline .node:nth-child(1){ transition-delay:.16s }
+  .pipeline .node:nth-child(2){ transition-delay:.24s }
+  .pipeline .node:nth-child(3){ transition-delay:.32s }
+  .pipeline .node:nth-child(4){ transition-delay:.40s }
+  .pipeline .node:nth-child(5){ transition-delay:.48s }
+
+
+
+  @keyframes slowSpin { to { transform: rotate(360deg);} }
+  @keyframes breathe { 0%,100%{ transform: scale(1)} 50%{ transform: scale(1.04)} }
+  .spin { animation: slowSpin 60s linear infinite; transform-origin: 50% 50%;}
+  .spin-rev { animation: slowSpin 90s linear infinite reverse; transform-origin: 50% 50%;}
+  .breathe { animation: breathe 6s ease-in-out infinite; transform-origin: 50% 50%;}
+
+  @media print { deck-stage section { opacity:1 !important;} .reveal{ opacity:1 !important; transform:none !important;} .agenda li, .services .cell, .pipeline .node, .learn .wc-wrap{ opacity:1 !important;} }
+</style>
+</head>
+<body>
+
+<!-- shared SVG icon symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- ladder -->
+    <symbol id="ic-ladder" viewBox="0 0 100 100">
+      <g fill="none" stroke="#1F1B17" stroke-width="2" stroke-linecap="round">
+        <line x1="28" y1="10" x2="28" y2="92"/>
+        <line x1="72" y1="10" x2="72" y2="92"/>
+        <line x1="28" y1="28" x2="72" y2="28"/>
+        <line x1="28" y1="46" x2="72" y2="46"/>
+        <line x1="28" y1="64" x2="72" y2="64"/>
+        <line x1="28" y1="82" x2="72" y2="82"/>
+      </g>
+      <circle cx="50" cy="22" r="5" fill="#B4563A"/>
+    </symbol>
+    <!-- helmet -->
+    <symbol id="ic-helmet" viewBox="0 0 100 100">
+      <g fill="none" stroke="#1F1B17" stroke-width="2" stroke-linecap="round">
+        <path d="M16 68 Q50 20 84 68 Z"/>
+        <line x1="12" y1="68" x2="88" y2="68"/>
+        <line x1="12" y1="76" x2="88" y2="76"/>
+        <line x1="50" y1="20" x2="50" y2="40"/>
+      </g>
+      <circle cx="50" cy="46" r="6" fill="#B4563A"/>
+    </symbol>
+    <!-- person on ladder with helmet -->
+    <symbol id="ic-ladder-helmet" viewBox="0 0 100 100">
+      <g fill="none" stroke="#1F1B17" stroke-width="2" stroke-linecap="round">
+        <!-- ladder -->
+        <line x1="14" y1="18" x2="14" y2="92"/>
+        <line x1="46" y1="18" x2="46" y2="92"/>
+        <line x1="14" y1="34" x2="46" y2="34"/>
+        <line x1="14" y1="52" x2="46" y2="52"/>
+        <line x1="14" y1="70" x2="46" y2="70"/>
+        <line x1="14" y1="88" x2="46" y2="88"/>
+        <!-- person body -->
+        <circle cx="72" cy="36" r="10"/>
+        <line x1="72" y1="46" x2="72" y2="72"/>
+        <line x1="72" y1="58" x2="58" y2="50"/>
+        <line x1="72" y1="58" x2="86" y2="50"/>
+        <line x1="72" y1="72" x2="60" y2="88"/>
+        <line x1="72" y1="72" x2="84" y2="88"/>
+        <!-- helmet on person -->
+        <path d="M62 34 Q72 20 82 34 Z"/>
+        <line x1="60" y1="34" x2="84" y2="34"/>
+      </g>
+      <circle cx="72" cy="36" r="4" fill="#B4563A"/>
+    </symbol>
+    <!-- person on top of ladder -->
+    <symbol id="ic-ladder-top" viewBox="0 0 100 100">
+      <g fill="none" stroke="#1F1B17" stroke-width="2" stroke-linecap="round">
+        <line x1="28" y1="40" x2="28" y2="92"/>
+        <line x1="72" y1="40" x2="72" y2="92"/>
+        <line x1="28" y1="58" x2="72" y2="58"/>
+        <line x1="28" y1="76" x2="72" y2="76"/>
+        <circle cx="50" cy="22" r="10"/>
+        <line x1="50" y1="32" x2="50" y2="40"/>
+      </g>
+      <circle cx="50" cy="22" r="4" fill="#B4563A"/>
+    </symbol>
+    <!-- truck / dock -->
+    <symbol id="ic-truck" viewBox="0 0 100 100">
+      <g fill="none" stroke="#1F1B17" stroke-width="2" stroke-linecap="round">
+        <rect x="12" y="40" width="42" height="32"/>
+        <path d="M54 48 L74 48 L84 60 L84 72 L54 72 Z"/>
+        <circle cx="30" cy="76" r="6"/>
+        <circle cx="72" cy="76" r="6"/>
+      </g>
+      <rect x="18" y="46" width="8" height="10" fill="#B4563A"/>
+    </symbol>
+    <!-- cctv / camera -->
+    <symbol id="ic-cam" viewBox="0 0 100 100">
+      <g fill="none" stroke="#1F1B17" stroke-width="2" stroke-linecap="round">
+        <rect x="14" y="30" width="52" height="26" rx="3"/>
+        <path d="M66 36 L84 28 L84 58 L66 50 Z"/>
+        <line x1="40" y1="56" x2="40" y2="76"/>
+        <line x1="26" y1="76" x2="54" y2="76"/>
+      </g>
+      <circle cx="26" cy="43" r="5" fill="#B4563A"/>
+    </symbol>
+    <!-- alert -->
+    <symbol id="ic-alert" viewBox="0 0 100 100">
+      <g fill="none" stroke="#1F1B17" stroke-width="2" stroke-linecap="round">
+        <path d="M50 14 L88 80 L12 80 Z"/>
+        <line x1="50" y1="38" x2="50" y2="58"/>
+      </g>
+      <circle cx="50" cy="68" r="4" fill="#B4563A"/>
+    </symbol>
+    <!-- pipeline step icons -->
+    <symbol id="ic-collect" viewBox="0 0 100 100">
+      <g fill="none" stroke="#1F1B17" stroke-width="2" stroke-linecap="round">
+        <rect x="18" y="22" width="64" height="44" rx="3"/>
+        <path d="M40 66 L40 76 L60 76 L60 66"/>
+        <line x1="32" y1="82" x2="68" y2="82"/>
+      </g>
+      <circle cx="50" cy="44" r="6" fill="#B4563A"/>
+    </symbol>
+    <symbol id="ic-label" viewBox="0 0 100 100">
+      <g fill="none" stroke="#1F1B17" stroke-width="2" stroke-linecap="round">
+        <rect x="18" y="22" width="64" height="56" rx="3"/>
+        <rect x="30" y="36" width="28" height="20"/>
+      </g>
+      <circle cx="44" cy="46" r="3" fill="#B4563A"/>
+      <rect x="62" y="60" width="14" height="6" fill="#B4563A"/>
+    </symbol>
+    <symbol id="ic-train" viewBox="0 0 100 100">
+      <g fill="none" stroke="#1F1B17" stroke-width="2" stroke-linecap="round">
+        <circle cx="28" cy="30" r="6"/>
+        <circle cx="72" cy="30" r="6"/>
+        <circle cx="28" cy="70" r="6"/>
+        <circle cx="72" cy="70" r="6"/>
+        <circle cx="50" cy="50" r="8"/>
+        <line x1="34" y1="30" x2="44" y2="46"/>
+        <line x1="66" y1="30" x2="56" y2="46"/>
+        <line x1="34" y1="70" x2="44" y2="54"/>
+        <line x1="66" y1="70" x2="56" y2="54"/>
+      </g>
+      <circle cx="50" cy="50" r="3" fill="#B4563A"/>
+    </symbol>
+    <symbol id="ic-deploy" viewBox="0 0 100 100">
+      <g fill="none" stroke="#1F1B17" stroke-width="2" stroke-linecap="round">
+        <path d="M50 14 L70 34 L62 34 L62 58 L38 58 L38 34 L30 34 Z"/>
+        <line x1="20" y1="74" x2="80" y2="74"/>
+        <line x1="26" y1="84" x2="74" y2="84"/>
+      </g>
+      <circle cx="50" cy="30" r="3" fill="#B4563A"/>
+    </symbol>
+    <symbol id="ic-monitor" viewBox="0 0 100 100">
+      <g fill="none" stroke="#1F1B17" stroke-width="2" stroke-linecap="round">
+        <rect x="14" y="24" width="72" height="44" rx="3"/>
+        <polyline points="22,58 34,48 44,54 56,36 68,46 78,40"/>
+        <line x1="40" y1="80" x2="60" y2="80"/>
+        <line x1="50" y1="68" x2="50" y2="80"/>
+      </g>
+      <circle cx="56" cy="36" r="3" fill="#B4563A"/>
+    </symbol>
+  </defs>
+</svg>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ============ 01 COVER ============ -->
+  <section class="cover" data-screen-label="01 Cover">
+    <div class="chrome">
+      <div class="chrome-top">
+        <div class="wordmark">
+          <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#1F1B17" stroke-width="1.25"/><circle cx="10" cy="10" r="3" fill="#B4563A"/></svg>
+          <span>GARMIN · DS TEAM</span>
+        </div>
+        <div>INTERNSHIP · YEAR-END REPORT</div>
+      </div>
+      <div></div>
+      <div class="chrome-bot">
+        <div>PRESS → TO ADVANCE</div>
+        <div>01 / 12</div>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <svg viewBox="0 0 560 560" width="100%" height="100%">
+        <g class="spin" style="transform-origin:280px 280px">
+          <circle cx="280" cy="280" r="260" fill="none" stroke="#D6CABA" stroke-width="1"/>
+          <circle cx="280" cy="280" r="210" fill="none" stroke="#D6CABA" stroke-width="1" stroke-dasharray="2 6"/>
+          <circle cx="540" cy="280" r="8" fill="#B4563A"/>
+        </g>
+        <g class="spin-rev" style="transform-origin:280px 280px">
+          <circle cx="280" cy="280" r="160" fill="none" stroke="#C78E5C" stroke-width="1"/>
+          <circle cx="440" cy="280" r="5" fill="#2A2520"/>
+        </g>
+        <g class="breathe" style="transform-origin:280px 280px">
+          <circle cx="280" cy="280" r="96" fill="#2A2520"/>
+          <circle cx="280" cy="280" r="96" fill="none" stroke="#B4563A" stroke-width="1.5" stroke-dasharray="3 5"/>
+          <circle cx="280" cy="280" r="24" fill="#F3ECE0"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="meta reveal">
+      <div class="title-en">Lambert Yang · Data Science Team · Intern</div>
+      <div class="title-en">2025 · Year-End Report</div>
+    </div>
+
+    <div class="slide">
+      <div class="reveal"><span class="eyebrow">A Year at Garmin DS</span></div>
+      <h1 class="tc reveal d1">打造 AI<br/><em>數位實習生</em></h1>
+      <div class="sub reveal d2">從撈影像、標註、訓練、到上線監控 ── 一段關於把自己<br/>從流程裡拿掉的實習故事。</div>
+    </div>
+  </section>
+
+  <!-- ============ 02 AGENDA ============ -->
+  <section class="agenda" data-screen-label="02 Agenda">
+    <div class="chrome">
+      <div class="chrome-top">
+        <div class="wordmark">
+          <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#1F1B17" stroke-width="1.25"/><circle cx="10" cy="10" r="3" fill="#B4563A"/></svg>
+          <span>GARMIN · DS TEAM</span>
+        </div>
+        <div>AGENDA</div>
+      </div>
+      <div></div>
+      <div class="chrome-bot">
+        <div>~ 7 MIN · Q&amp;A AT END</div>
+        <div>02 / 12</div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="left">
+        <div class="tag reveal"><span class="eyebrow">今日議程 · Agenda</span></div>
+        <h2 class="tc reveal d1">五個章節，<br/>一條<br/>自動化的路。</h2>
+      </div>
+      <div class="right reveal d2">
+        <ol>
+          <li><span class="n mono">01</span><span class="t tc">Hello, 我是 Lambert<small>About me &amp; DS Team</small></span><span class="d">1 MIN</span></li>
+          <li><span class="n mono">02</span><span class="t tc">我在做什麼<small>Argus AI &amp; AI Agent 兩條主線</small></span><span class="d">1 MIN</span></li>
+          <li><span class="n mono">03</span><span class="t tc">眼睛 · Argus Pipeline<small>五個階段 &amp; 標註突破</small></span><span class="d">2 MIN</span></li>
+          <li><span class="n mono">04</span><span class="t tc">行動力 · Agent 落地<small>Benchmark + 已上線的數位助理</small></span><span class="d">2 MIN</span></li>
+          <li><span class="n mono">05</span><span class="t tc">學到的事 &amp; Thank you<small>Takeaways &amp; Q&amp;A</small></span><span class="d">1 MIN</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 ABOUT ME ============ -->
+  <section class="about" data-screen-label="03 About Me">
+    <div class="chrome">
+      <div class="chrome-top">
+        <div class="wordmark">
+          <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#1F1B17" stroke-width="1.25"/><circle cx="10" cy="10" r="3" fill="#B4563A"/></svg>
+          <span>GARMIN · DS TEAM</span>
+        </div>
+        <div>CH. 01 · HELLO</div>
+      </div>
+      <div></div>
+      <div class="chrome-bot">
+        <div>WHO'S TALKING</div>
+        <div>03 / 12</div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div>
+        <span class="eyebrow reveal">Chapter 01 · About Me</span>
+        <h2 class="tc reveal d1" style="margin-top:20px;">Hi, 我是<br/><em>Lambert</em> Yang。</h2>
+        <p class="reveal d2 tc" style="font-size:24px;color:var(--ink-2);line-height:1.6;max-width:700px;margin:0;">
+          過去一年在 <b>Garmin DS Team 第四組</b>擔任實習生 ── 我們是公司內負責<b>智慧影像分析</b>的團隊，主軸分成兩條：<b>產線上</b>的視覺任務、以及<b>工廠廠區內部</b>的視覺任務。我主要負責後者。
+        </p>
+        <div class="meta-grid reveal d3">
+          <div><div class="k">Role</div><div class="v">Intern · DS Team 4</div></div>
+          <div><div class="k">Tenure</div><div class="v">2025 · 約一年</div></div>
+          <div><div class="k">Focus</div><div class="v tc">廠區內部影像分析</div></div>
+          <div><div class="k">Products</div><div class="v">Argus AI · GarminClaw</div></div>
+        </div>
+      </div>
+      <div class="port reveal d2">
+        <span class="corner-tag">FIG. 01 — ID</span>
+        <!-- Portrait placeholder -->
+        <svg viewBox="0 0 240 300" width="60%" height="60%">
+          <rect width="240" height="300" fill="none"/>
+          <circle cx="120" cy="110" r="48" fill="none" stroke="#1F1B17" stroke-width="1.5"/>
+          <path d="M44 260 Q120 180 196 260 L196 300 L44 300 Z" fill="none" stroke="#1F1B17" stroke-width="1.5"/>
+          <circle cx="120" cy="110" r="16" fill="#B4563A"/>
+        </svg>
+        <span class="corner-tag-r">PHOTO</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 TWO PILLARS ============ -->
+  <section class="pillars" data-screen-label="04 Two Pillars">
+    <div class="chrome">
+      <div class="chrome-top">
+        <div class="wordmark"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#1F1B17" stroke-width="1.25"/><circle cx="10" cy="10" r="3" fill="#B4563A"/></svg><span>GARMIN · DS TEAM</span></div>
+        <div>CH. 02 · WHAT I DO</div>
+      </div><div></div>
+      <div class="chrome-bot"><div>TWO PILLARS</div><div>04 / 12</div></div>
+    </div>
+
+    <div class="slide">
+      <span class="eyebrow reveal">Chapter 02 · 我在做什麼</span>
+      <h2 class="tc reveal d1" style="margin-top:14px;">兩條主線任務</h2>
+      <p class="lead reveal d2 tc">
+        我的工作分成兩條主線：替 <b>Argus AI</b> 打造新的視覺服務，並開發與測試 <b>AI Agent</b>
+      </p>
+
+      <div class="grid">
+        <div class="card reveal d3">
+          <svg class="icon" viewBox="0 0 100 100"><use href="#ic-cam"/></svg>
+          <div class="tag">LINE A</div>
+          <h3 class="tc">Argus AI</h3>
+          <div class="en">INTELLIGENT SURVEILLANCE</div>
+          <p class="tc">一套接在既有監視器上的 AI 視覺系統。我替它開發新的偵測服務 ── 有安全類的，也有營運應用類的。</p>
+          <ul class="tc">
+            <li>安全：PPE（安全帽等）穿戴偵測、梯子使用偵測</li>
+            <li>應用：貨車碼頭即時占用預估</li>
+          </ul>
+        </div>
+
+        <div class="card reveal d4">
+          <svg class="icon" viewBox="0 0 100 100"><use href="#ic-alert"/></svg>
+          <div class="tag">LINE B</div>
+          <h3 class="tc">AI Agent</h3>
+          <div class="en">OPENCLAW · IN-HOUSE PLATFORM</div>
+          <p class="tc">打造人人都可以輕鬆使用的 Agent 系統。我負責探索新技術與新框架，並設計 Benchmark 去測試新的模型。</p>
+          <ul class="tc">
+            <li>腦袋：Benchmark 測試模型 &amp; 部署框架</li>
+            <li>行動力：做前端聊天室窗，串出真的能用的助理</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 SERVICES GRID ============ -->
+  <section class="services" data-screen-label="05 Argus Services">
+    <div class="chrome">
+      <div class="chrome-top">
+        <div class="wordmark"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#1F1B17" stroke-width="1.25"/><circle cx="10" cy="10" r="3" fill="#B4563A"/></svg><span>GARMIN · DS TEAM</span></div>
+        <div>CH. 02 · ARGUS SERVICES</div>
+      </div><div></div>
+      <div class="chrome-bot"><div>SAFETY · OPERATIONS</div><div>05 / 12</div></div>
+    </div>
+
+    <div class="slide">
+      <span class="eyebrow reveal">Argus AI · 我開發的服務</span>
+      <h2 class="tc reveal d1" style="margin-top:14px;">六個服務，都在解監視器裡看得到、但人看不完的事。</h2>
+      <p class="lead reveal d2 tc" style="max-width:none;">
+        每個服務都是一個視覺模型，接在廠區既有的監視器上 24/7 盯場。前四項是<b>安全類</b>，後兩項是<b>營運應用類</b>。
+      </p>
+
+      <div class="grid">
+        <div class="cell safety">
+          <div>
+            <div class="cat">SAFETY</div>
+            <h4 class="tc">安全護具穿戴偵測</h4>
+            <p class="tc">在管制區域辨識人員是否依規穿戴安全帽或安全背心等裝備。</p>
+          </div>
+          <svg class="icon" viewBox="0 0 100 100"><use href="#ic-helmet"/></svg>
+          <div class="num">01</div>
+        </div>
+        <div class="cell safety">
+          <div>
+            <div class="cat">SAFETY · LADDER</div>
+            <h4 class="tc">踩梯頂警示</h4>
+            <p class="tc">當有人站到梯子最高兩階，即時發出警示通知現場。</p>
+          </div>
+          <svg class="icon" viewBox="0 0 100 100"><use href="#ic-ladder-top"/></svg>
+          <div class="num">02</div>
+        </div>
+        <div class="cell safety">
+          <div>
+            <div class="cat">SAFETY · LADDER</div>
+            <h4 class="tc">梯子使用要戴安全帽</h4>
+            <p class="tc">偵測使用梯子時未佩戴安全帽的人員，立即產生告警。</p>
+          </div>
+          <svg class="icon" viewBox="0 0 100 100"><use href="#ic-ladder-helmet"/></svg>
+          <div class="num">03</div>
+        </div>
+        <div class="cell safety">
+          <div>
+            <div class="cat">SAFETY · LADDER</div>
+            <h4 class="tc">不可踏梯行走</h4>
+            <p class="tc">偵測有人踩在梯子橫桿上當高蹺走路，是常見的違規使用行為。</p>
+          </div>
+          <svg class="icon" viewBox="0 0 100 100"><use href="#ic-ladder"/></svg>
+          <div class="num">04</div>
+        </div>
+        <div class="cell ops">
+          <div>
+            <div class="cat">OPERATIONS</div>
+            <h4 class="tc">貨車碼頭占用預估</h4>
+            <p class="tc">即時盤點每個 dock 的貨車占用狀態，供排程與分析使用。</p>
+          </div>
+          <svg class="icon" viewBox="0 0 100 100"><use href="#ic-truck"/></svg>
+          <div class="num">05</div>
+        </div>
+        <div class="cell ops">
+          <div>
+            <div class="cat">OPERATIONS</div>
+            <h4 class="tc">異常事件週報</h4>
+            <p class="tc">由 AI Agent 自動產出與寄送，直接落在信箱裡 ── 問題主動找上人。</p>
+          </div>
+          <svg class="icon" viewBox="0 0 100 100"><use href="#ic-alert"/></svg>
+          <div class="num">06</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 PIPELINE ============ -->
+  <section class="pipeline" data-screen-label="06 ML Pipeline">
+    <div class="chrome">
+      <div class="chrome-top">
+        <div class="wordmark"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#1F1B17" stroke-width="1.25"/><circle cx="10" cy="10" r="3" fill="#B4563A"/></svg><span>GARMIN · DS TEAM</span></div>
+        <div>CH. 03 · ML PIPELINE</div>
+      </div><div></div>
+      <div class="chrome-bot"><div>COLLECT → LABEL → TRAIN → DEPLOY → MONITOR</div><div>06 / 12</div></div>
+    </div>
+
+    <div class="slide">
+      <span class="eyebrow reveal">Chapter 03 · Pipeline</span>
+      <h2 class="tc reveal d1" style="margin-top:14px;">一個模型的人生<br/>有五個階段。</h2>
+      <p class="lead reveal d2 tc">每個服務、每個模型，都要走完這五步。之後的所有故事，都發生在這條線上。</p>
+
+      <div class="flow">
+        <div class="node">
+          <div>
+            <svg class="i" viewBox="0 0 100 100"><use href="#ic-collect"/></svg>
+            <div class="lbl">STEP 01</div>
+            <h4 class="tc">撈影像</h4>
+          </div>
+          <p class="tc">從既有 CCTV 系統裡，依時間、地點、事件撈出訓練素材。</p>
+        </div>
+        <div class="node">
+          <div>
+            <svg class="i" viewBox="0 0 100 100"><use href="#ic-label"/></svg>
+            <div class="lbl">STEP 02</div>
+            <h4 class="tc">標註</h4>
+          </div>
+          <p class="tc">替每張圖畫 box、標 class ── 模型要學的「答案卷」。</p>
+        </div>
+        <div class="node">
+          <div>
+            <svg class="i" viewBox="0 0 100 100"><use href="#ic-train"/></svg>
+            <div class="lbl">STEP 03</div>
+            <h4 class="tc">訓練</h4>
+          </div>
+          <p class="tc">餵資料進 YOLO，調超參數，直到驗證集指標達到上線門檻。</p>
+        </div>
+        <div class="node">
+          <div>
+            <svg class="i" viewBox="0 0 100 100"><use href="#ic-deploy"/></svg>
+            <div class="lbl">STEP 04</div>
+            <h4 class="tc">上線</h4>
+          </div>
+          <p class="tc">打包成服務、部署到 K8s、接進 Argus 的推論 pipeline。</p>
+        </div>
+        <div class="node">
+          <div>
+            <svg class="i" viewBox="0 0 100 100"><use href="#ic-monitor"/></svg>
+            <div class="lbl">STEP 05</div>
+            <h4 class="tc">監控</h4>
+          </div>
+          <p class="tc">上線不是終點 ── 產生報表，看誤判率、漏判率有沒有漂移。</p>
+        </div>
+      </div>
+
+      <svg class="reveal d5" viewBox="0 0 1200 72" width="100%" style="margin-top:10px;" overflow="visible">
+        <defs>
+          <marker id="fb-arrow" markerWidth="8" markerHeight="8" refX="1" refY="4" orient="auto">
+            <path d="M8,0 L0,4 L8,8 Z" fill="#B4563A"/>
+          </marker>
+        </defs>
+        <!-- U-shape: start bottom-right (STEP 05), curve down, left, up to STEP 01 -->
+        <path d="M1180,4 L1180,56 L20,56 L20,4"
+              fill="none" stroke="#B4563A" stroke-width="2" stroke-dasharray="7 5"
+              marker-end="url(#fb-arrow)"/>
+        <rect x="330" y="38" width="540" height="26" fill="#F3ECE0"/>
+        <text x="600" y="57" text-anchor="middle"
+              font-family="JetBrains Mono, monospace" font-size="22" fill="#B4563A" letter-spacing="0.06em">效果不佳 → 重新撈資料，從頭來</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============ 06B BOTTLENECKS (duplicate of 06 with emphasis) ============ -->
+  <section class="pipeline" data-screen-label="06B Bottlenecks">
+    <div class="chrome">
+      <div class="chrome-top">
+        <div class="wordmark"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#1F1B17" stroke-width="1.25"/><circle cx="10" cy="10" r="3" fill="#B4563A"/></svg><span>GARMIN · DS TEAM</span></div>
+        <div>CH. 03 · ML PIPELINE — BOTTLENECKS</div>
+      </div><div></div>
+      <div class="chrome-bot"><div>LABEL &amp; MONITOR — THE TWO BOTTLENECKS</div><div>06 / 12</div></div>
+    </div>
+
+    <div class="slide">
+      <span class="eyebrow reveal">Chapter 03 · Pipeline · Bottlenecks</span>
+      <h2 class="tc reveal d1" style="margin-top:14px;">五個階段裡，<br/><span style="color:#B4563A;">標註</span> 與 <span style="color:#B4563A;">監控</span> 是兩大瓶頸。</h2>
+      <p class="lead reveal d2 tc">其他三步可以靠工具與算力推進；唯獨這兩步，會把人的時間整段吃掉。</p>
+
+      <div class="flow">
+        <div class="node" style="opacity:.45;">
+          <div>
+            <svg class="i" viewBox="0 0 100 100"><use href="#ic-collect"/></svg>
+            <div class="lbl">STEP 01</div>
+            <h4 class="tc">撈影像</h4>
+          </div>
+          <p class="tc">從既有 CCTV 系統裡，依時間、地點、事件撈出訓練素材。</p>
+        </div>
+        <div class="node" style="background:#FBE9DF; border:2px solid #B4563A; box-shadow:0 8px 24px rgba(180,86,58,0.18);">
+          <div>
+            <svg class="i" viewBox="0 0 100 100" style="color:#B4563A;"><use href="#ic-label"/></svg>
+            <div class="lbl" style="color:#B4563A;">STEP 02 · 瓶頸</div>
+            <h4 class="tc" style="color:#B4563A;">標註</h4>
+          </div>
+          <p class="tc" style="color:#1F1B17;"><strong>非常費時費工。</strong>每張圖都要人工畫 box、標 class，量大、易疲勞、難外包。</p>
+        </div>
+        <div class="node" style="opacity:.45;">
+          <div>
+            <svg class="i" viewBox="0 0 100 100"><use href="#ic-train"/></svg>
+            <div class="lbl">STEP 03</div>
+            <h4 class="tc">訓練</h4>
+          </div>
+          <p class="tc">餵資料進 YOLO，調超參數，直到驗證集指標達到上線門檻。</p>
+        </div>
+        <div class="node" style="opacity:.45;">
+          <div>
+            <svg class="i" viewBox="0 0 100 100"><use href="#ic-deploy"/></svg>
+            <div class="lbl">STEP 04</div>
+            <h4 class="tc">上線</h4>
+          </div>
+          <p class="tc">打包成服務、部署到 K8s、接進 Argus 的推論 pipeline。</p>
+        </div>
+        <div class="node" style="background:#FBE9DF; border:2px solid #B4563A; box-shadow:0 8px 24px rgba(180,86,58,0.18);">
+          <div>
+            <svg class="i" viewBox="0 0 100 100" style="color:#B4563A;"><use href="#ic-monitor"/></svg>
+            <div class="lbl" style="color:#B4563A;">STEP 05 · 瓶頸</div>
+            <h4 class="tc" style="color:#B4563A;">監控</h4>
+          </div>
+          <p class="tc" style="color:#1F1B17;"><strong>除非使用者主動回報，</strong>否則我們只能自己一直盯著服務、檢查誤報是否存在。</p>
+        </div>
+      </div>
+
+      <svg class="reveal d5" viewBox="0 0 1200 72" width="100%" style="margin-top:10px;" overflow="visible">
+        <defs>
+          <marker id="fb-arrow-2" markerWidth="8" markerHeight="8" refX="1" refY="4" orient="auto">
+            <path d="M8,0 L0,4 L8,8 Z" fill="#B4563A"/>
+          </marker>
+        </defs>
+        <path d="M1180,4 L1180,56 L20,56 L20,4"
+              fill="none" stroke="#B4563A" stroke-width="2" stroke-dasharray="7 5"
+              marker-end="url(#fb-arrow-2)"/>
+        <rect x="300" y="38" width="600" height="26" fill="#F3ECE0"/>
+        <text x="600" y="57" text-anchor="middle"
+              font-family="JetBrains Mono, monospace" font-size="22" fill="#B4563A" letter-spacing="0.06em">兩端的人力負擔，是整條 pipeline 的真正瓶頸</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============ 07 LABELING BEFORE/AFTER ============ -->
+  <section class="hero-stat" data-screen-label="07 Labeling">
+    <div class="chrome">
+      <div class="chrome-top">
+        <div class="wordmark"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#1F1B17" stroke-width="1.25"/><circle cx="10" cy="10" r="3" fill="#B4563A"/></svg><span>GARMIN · DS TEAM</span></div>
+        <div>PILLAR A · 眼睛</div>
+      </div><div></div>
+      <div class="chrome-bot"><div>LABELING BREAKTHROUGH</div><div>07 / 12</div></div>
+    </div>
+
+    <div class="slide">
+      <span class="eyebrow reveal">Pillar A · 讓它學會看</span>
+      <h2 class="tc reveal d1">我導入了 <em>VLM 自動標註</em></h2>
+      <p class="reveal d2">標註是整條 pipeline 最耗時的瓶頸。我把 VLM 接進流程，讓模型先預標，人工只做校對訂正。</p>
+
+      <div class="big-num reveal d3">−80<span>%</span></div>
+      <div class="big-label reveal d3">標註時間縮短</div>
+
+      <div class="compare-row reveal d4">
+        <div class="side">
+          <div class="num" style="color:var(--ink-3);opacity:.5;">~10 天</div>
+          <div class="lbl">BEFORE</div>
+          <div class="detail tc">逐張手動拉框<br/>數千張 = 好幾個工作天</div>
+        </div>
+        <div class="arrow-col">
+          <svg width="48" height="32" viewBox="0 0 48 32"><path d="M4 16h40M44 16l-10-10M44 16l-10 10" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="side">
+          <div class="num" style="color:var(--accent);">~2 天</div>
+          <div class="lbl" style="color:var(--ink);">AFTER</div>
+          <div class="detail tc">VLM 先標 + 人工訂正<br/>時間大幅縮短</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 TRANSITION ============ -->
+  <section class="transition" data-screen-label="08 Transition">
+    <div class="chrome">
+      <div class="chrome-top">
+        <div class="wordmark"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#1F1B17" stroke-width="1.25"/><circle cx="10" cy="10" r="3" fill="#B4563A"/></svg><span>GARMIN · DS TEAM</span></div>
+        <div>PILLAR A → B</div>
+      </div><div></div>
+      <div class="chrome-bot"><div>CLOSING THE LOOP</div><div>08 / 12</div></div>
+    </div>
+
+    <div class="slide">
+      <span class="eyebrow reveal">從眼睛到行動力</span>
+      <h2 class="tc reveal d1">但光有眼睛還不夠 ──<br/>要讓整個 Cycle <em>自己轉</em>。</h2>
+      <p class="reveal d2 tc">標註變快了，模型可以更頻繁地更新。但撈影像、訓練、上線、監控這些步驟，還是需要人來串。</p>
+      <p class="reveal d3 tc" style="margin-top:16px;color:var(--accent);font-weight:600;font-size:32px;max-width:none;">如果有一個 AI Agent 幫忙，整條 Pipeline 就能自動進化。</p>
+      <div class="hint-row reveal d3">
+        <div class="hint"><div class="dot"></div>撈影像</div>
+        <div class="hint"><div class="dot"></div>標註</div>
+        <div class="hint"><div class="dot"></div>訓練</div>
+        <div class="hint"><div class="dot"></div>上線</div>
+        <div class="hint"><div class="dot"></div>監控</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 09 GARMINCLAW ============ -->
+  <section class="gclaw" data-screen-label="09 GarminClaw">
+    <div class="chrome">
+      <div class="chrome-top">
+        <div class="wordmark"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#1F1B17" stroke-width="1.25"/><circle cx="10" cy="10" r="3" fill="#B4563A"/></svg><span>GARMIN · DS TEAM</span></div>
+        <div>PILLAR B · GARMINCLAW</div>
+      </div><div></div>
+      <div class="chrome-bot"><div>THE DIGITAL INTERN, FOR REAL</div><div>09 / 12</div></div>
+    </div>
+
+    <div class="slide">
+      <div class="hero">
+        <div class="hero-text">
+          <span class="eyebrow reveal">Pillar B · GarminClaw</span>
+          <h2 class="tc reveal d1">GarminClaw 讓 Cycle<br/><em>自己轉起來</em>。</h2>
+          <p class="reveal d2 tc" style="max-width:none;">基於前陣子十分熱門的 <b>OpenClaw</b> 開發，<b>GarminClaw</b> 可以自動監控線上模型 ── 一旦誤判太多，就自動觸發重新訓練，把整條 Cycle 串起來。</p>
+        </div>
+        <div class="cycle reveal d3">
+          <span class="tag">FIG. AUTO-CYCLE</span>
+          <svg viewBox="0 0 240 240" width="100%" height="100%">
+            <defs>
+              <marker id="cyc-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" fill="#B4563A"/>
+              </marker>
+            </defs>
+            <!-- 4 arc segments forming full loop, clockwise: 監控 → 標註 → 重訓 → 部署 -->
+            <g fill="none" stroke="#B4563A" stroke-width="2" stroke-linecap="round">
+              <path d="M 130 70 A 52 52 0 0 1 170 110" marker-end="url(#cyc-arrow)"/>
+              <path d="M 170 130 A 52 52 0 0 1 130 170" marker-end="url(#cyc-arrow)"/>
+              <path d="M 110 170 A 52 52 0 0 1 70 130" marker-end="url(#cyc-arrow)"/>
+              <path d="M 70 110 A 52 52 0 0 1 110 70" marker-end="url(#cyc-arrow)"/>
+            </g>
+            <!-- node dots at 12/3/6/9 positions (r=52) -->
+            <g fill="#F3ECE0" stroke="#1F1B17" stroke-width="1.5">
+              <circle cx="120" cy="68" r="5"/>
+              <circle cx="172" cy="120" r="5"/>
+              <circle cx="120" cy="172" r="5"/>
+              <circle cx="68" cy="120" r="5"/>
+            </g>
+            <!-- labels outside the circle -->
+            <g font-family="Noto Sans TC, sans-serif" font-size="18" fill="#1F1B17" font-weight="500">
+              <text x="120" y="26" text-anchor="middle">監控</text>
+              <text x="210" y="126" text-anchor="middle">標註</text>
+              <text x="120" y="228" text-anchor="middle">重訓</text>
+              <text x="30" y="126" text-anchor="middle">部署</text>
+            </g>
+            <!-- center claw badge -->
+            <circle cx="120" cy="120" r="22" fill="#B4563A"/>
+            <text x="120" y="124" font-family="JetBrains Mono, monospace" font-size="11" fill="#F3ECE0" text-anchor="middle" font-weight="700">CLAW</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="more-label reveal d4"><span>除此之外，我還開發了</span></div>
+
+      <div class="feat-row">
+        <div class="fcard reveal d4">
+          <div class="fn">01</div>
+          <h5 class="tc">異常事件週報</h5>
+          <p class="fd tc">自動產出 &amp; 寄送，問題主動找上人。</p>
+        </div>
+        <div class="fcard reveal d5">
+          <div class="fn">02</div>
+          <h5 class="tc">訂便當提醒</h5>
+          <p class="fd tc">主動通知該訂了，不再漏掉。</p>
+        </div>
+        <div class="fcard reveal d5">
+          <div class="fn">03</div>
+          <h5 class="tc">Confluence / Jira</h5>
+          <p class="fd tc">聊天窗直接問，不用自己翻。</p>
+        </div>
+        <div class="fcard reveal d6">
+          <div class="fn">04</div>
+          <h5 class="tc">會議錄音 + 紀錄</h5>
+          <p class="fd tc">幫我錄音，自動做會議摘要。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10 GARMINCLAW GALLERY ============ -->
+  <section class="gallery" data-screen-label="10 GarminClaw Gallery">
+    <div class="chrome">
+      <div class="chrome-top">
+        <div class="wordmark"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#1F1B17" stroke-width="1.25"/><circle cx="10" cy="10" r="3" fill="#B4563A"/></svg><span>GARMIN · DS TEAM</span></div>
+        <div>PILLAR B · IN ACTION</div>
+      </div><div></div>
+      <div class="chrome-bot"><div>GARMINCLAW · LIVE SCREENS</div><div>10 / 12</div></div>
+    </div>
+
+    <div class="slide">
+      <span class="eyebrow reveal">Pillar B · 真的長這樣</span>
+      <h2 class="tc reveal d1">GarminClaw <em>實機畫面</em>。</h2>
+
+      <div class="shots">
+        <figure class="reveal d3">
+          <div class="shot">
+            <img src="Confluence.png" alt="Confluence/Jira 聊天查詢截圖" style="object-position: 50% 0%;"/>
+            <span class="corner-tl">FIG. 01</span>
+          </div>
+          <figcaption>
+            <div class="num">01 · CHAT</div>
+            <div class="ttl tc">Confluence / Jira 聊天查詢</div>
+            <div class="desc tc">直接問 Agent，省下翻文件、找 ticket 的時間。</div>
+          </figcaption>
+        </figure>
+
+        <figure class="reveal d4">
+          <div class="shot">
+            <img src="AI%E5%91%A8%E5%A0%B1.png" alt="異常事件週報截圖" style="object-position: left top;"/>
+            <span class="corner-tl">FIG. 02</span>
+          </div>
+          <figcaption>
+            <div class="num">02 · REPORT</div>
+            <div class="ttl tc">異常事件週報</div>
+            <div class="desc tc">每週自動寄送，把問題主動推到信箱裡。</div>
+          </figcaption>
+        </figure>
+
+        <figure class="reveal d5">
+          <div class="shot">
+            <img src="%E6%9C%83%E8%AD%B0%E8%A8%98%E9%8C%84.png" alt="會議錄音 + 摘要截圖" style="object-position: left top;"/>
+            <span class="corner-tl">FIG. 03</span>
+          </div>
+          <figcaption>
+            <div class="num">03 · MEETING</div>
+            <div class="ttl tc">會議錄音 + 摘要</div>
+            <div class="desc tc">幫我錄音並產出條列式紀錄，會後直接拿來用。</div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 11 LEARNINGS ============ -->
+  <section class="learn" data-screen-label="11 Learnings">
+    <div class="chrome">
+      <div class="chrome-top">
+        <div class="wordmark"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#1F1B17" stroke-width="1.25"/><circle cx="10" cy="10" r="3" fill="#B4563A"/></svg><span>GARMIN · DS TEAM</span></div>
+        <div>CH. 06 · TAKEAWAYS</div>
+      </div><div></div>
+      <div class="chrome-bot"><div>WHAT I LEARNED</div><div>11 / 12</div></div>
+    </div>
+
+    <div class="slide">
+      <span class="eyebrow reveal">Chapter 06 · Takeaways</span>
+      <h2 class="tc reveal d1" style="margin-top:14px;">我從這一年<br/>帶走的東西。</h2>
+
+      <div class="wc-wrap">
+        <canvas id="wordcloud-canvas"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 12 CLOSING ============ -->
+  <section class="closing" data-screen-label="12 Thank You">
+    <div class="chrome">
+      <div class="chrome-top">
+        <div class="wordmark"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="#1F1B17" stroke-width="1.25"/><circle cx="10" cy="10" r="3" fill="#B4563A"/></svg><span>GARMIN · DS TEAM</span></div>
+        <div>FIN · Q&amp;A</div>
+      </div><div></div>
+      <div class="chrome-bot"><div>END OF REPORT</div><div>12 / 12</div></div>
+    </div>
+
+    <div class="orbit reveal d3">
+      <svg viewBox="0 0 900 900" width="100%" height="100%">
+        <g class="spin" style="transform-origin:450px 450px">
+          <circle cx="450" cy="450" r="430" fill="none" stroke="#D6CABA" stroke-width="1"/>
+          <circle cx="450" cy="450" r="340" fill="none" stroke="#D6CABA" stroke-width="1" stroke-dasharray="2 6"/>
+          <circle cx="880" cy="450" r="12" fill="#B4563A"/>
+          <circle cx="450" cy="110" r="7"  fill="#2A2520"/>
+        </g>
+        <g class="spin-rev" style="transform-origin:450px 450px">
+          <circle cx="450" cy="450" r="250" fill="none" stroke="#C78E5C" stroke-width="1"/>
+          <circle cx="700" cy="450" r="6" fill="#2A2520"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="slide">
+      <div class="reveal"><span class="eyebrow">Thank You · 謝謝</span></div>
+      <h1 class="big tc reveal d1">下一位<br/>實習生是<em>AI</em>。</h1>
+      <p class="sub reveal d2 tc">謝謝 DS Team 一整年的陪伴 ── 你們教我的，比我做完的多。<br/>剩下的問題，就交給 Q&amp;A。</p>
+
+      <div class="foot reveal d3">
+        <div class="col">
+          <div class="k">Next</div>
+          <div class="v tc">Q&amp;A 時間</div>
+        </div>
+        <div class="col">
+          <div class="k">Presenter</div>
+          <div class="v">Lambert Yang</div>
+        </div>
+        <div class="col">
+          <div class="k">Team</div>
+          <div class="v">Garmin · DS Team</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<script>
+(function(){
+  var words = [
+    ['Python',           9, '#5B5249'],
+    ['Docker',           7, '#B4563A'],
+    ['Kubernetes',       7, '#1F1B17'],
+    ['GarminClaw',       7, '#1F1B17'],
+    ['GitLab CI/CD',     6, '#B4563A'],
+    ['ElasticSearch',    6, '#6B7F4A'],
+    ['YOLO',             5, '#B4563A'],
+    ['Grafana',          5, '#6B7F4A'],
+    ['GitHub Actions',   5, '#B4563A'],
+    ['VLM Benchmark',    5, '#9A5830'],
+    ['MySQL',            4, '#C78E5C'],
+    ['MongoDB',          4, '#C78E5C'],
+    ['Dozzle',           4, '#6B7F4A'],
+    ['devtools',         3, '#9A8F82'],
+    ['Confluence',       4, '#5B5249'],
+    ['Jira',             4, '#5B5249'],
+    ['FastAPI',          5, '#6B7F4A'],
+    ['自動訂便當',        2, '#C78E5C'],
+  ];
+
+  var canvas = document.getElementById('wordcloud-canvas');
+  var rendered = false;
+
+  function render(){
+    if(rendered) return;
+    var wrap = canvas.parentElement;
+    var w = wrap.clientWidth  || 1696;
+    var h = wrap.clientHeight || 500;
+    canvas.width  = w * 2;
+    canvas.height = h * 2;
+    canvas.style.width  = w + 'px';
+    canvas.style.height = h + 'px';
+
+    var originY = 0.15;
+
+    var list = words.map(function(d){
+      return [d[0], d[1]];
+    });
+
+    WordCloud(canvas, {
+      list: list,
+      gridSize: Math.round(100 * (w / 1696)),
+      weightFactor: function(size){ return size * 22 * (w / 1696); },
+      fontFamily: 'JetBrains Mono, monospace',
+      fontWeight: 600,
+      color: function(word){
+        for(var i=0;i<words.length;i++){
+          if(words[i][0]===word) return words[i][2];
+        }
+        return '#1F1B17';
+      },
+      backgroundColor: 'transparent',
+      rotateRatio: 0,
+      rotationSteps: 0,
+      shape: 'cardioid',
+      origin: [w, h * 2 * originY],
+      shuffle: true,
+      drawOutOfBound: false,
+    });
+    rendered = true;
+  }
+
+  /* Observe when the learn section becomes active */
+  var observer = new MutationObserver(function(mutations){
+    mutations.forEach(function(m){
+      if(m.type==='attributes' && m.attributeName==='data-deck-active'){
+        var sec = document.querySelector('section.learn');
+        if(sec && sec.hasAttribute('data-deck-active')){
+          setTimeout(render, 300);
+        }
+      }
+    });
+  });
+
+  var sec = document.querySelector('section.learn');
+  if(sec){
+    observer.observe(sec, {attributes:true});
+    /* Also try on load in case it's already active */
+    if(sec.hasAttribute('data-deck-active')) setTimeout(render, 300);
+  }
+})();
+</script>
+
+</body>
+</html>
