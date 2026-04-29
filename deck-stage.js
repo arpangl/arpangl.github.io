@@ -567,9 +567,9 @@
       const key = e.key;
       let handled = true;
 
-      if (key === 'ArrowRight' || key === 'PageDown' || key === ' ' || key === 'Spacebar') {
+      if (key === 'ArrowRight' || key === 'PageDown' || key === ' ' || key === 'Spacebar' || key === 'ArrowDown') {
         this._go(this._index + 1, 'keyboard');
-      } else if (key === 'ArrowLeft' || key === 'PageUp') {
+      } else if (key === 'ArrowLeft' || key === 'PageUp' key === 'ArrowUp') {
         this._go(this._index - 1, 'keyboard');
       } else if (key === 'Home') {
         this._go(0, 'keyboard');
