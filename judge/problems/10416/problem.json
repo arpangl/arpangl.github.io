@@ -5,6 +5,6 @@
   "category": [
     "數學"
   ],
-  "description": "10416:Last Digit\nTime Limit: 3 sec\nDescription\nGive you a integer number N (1<=n<=2*10100). Please compute\nS=11+22+33+…+NN\nGive the last digit of S to me.\nInput\nInput file consists of several Ns, each N a line. It is ended with N=0.\nOutput\nFor each N give a line containing only one digit, which is the last digit of S.\nSample Input\nSample Output\nDownload Sample Input/Output\n1\n2\n3\n0\n1\n5\n2\ninput, output\nSource: http://uva.onlinejudge.org/external/101/10162.html\nKeyword:",
+  "description": "Description\n───────────\nGive you a integer number N (1<=n<=2*10100). Please compute\n\n            S=11+22+33+…+NN\n\nGive the last digit of S to me.\n\nInput\n─────\nInput file consists of several Ns, each N a line. It is ended with N=0.\n\nOutput\n──────\nFor each N give a line containing only one digit, which is the last digit of S.\n\nSample Input\n────────────\n    1\n    2\n    3\n    0\n\nSample Output\n─────────────\n    1\n    5\n    2",
   "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=10416&cid=5"
 }

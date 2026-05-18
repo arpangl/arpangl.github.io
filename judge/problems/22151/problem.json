@@ -3,6 +3,6 @@
   "name": "Big Mod",
   "time_limit": 3.0,
   "category": [],
-  "description": "22151:Big Mod\nTime Limit: 3 sec\nDescription\nCalculate\nfor large values of B, P, and M using an efficient algorithm. (That's right, this problem has a time dependency !!!.)\nInput\nThree integer values (in the order B, P, M) will be read one number per line. B and P are integers in the range 0 to 2147483647 inclusive. M is an integer in the range 1 to 46340 inclusive.\nOutput\nThe result of the computation. A single integer.\nSample Input\nSample Output\n3\n18132\n17\n1765\n3\n2374859\n3029382\n36123\n13\n2\n13195\nHint\n- (A*B)%C = (A%C) * (B%C)\n- (BP)%M = (BP/2%M) * (BP/2%M)\nSource: http://uva.onlinejudge.org/external/3/374.html\nKeyword:",
+  "description": "Description\n───────────\nCalculate\n\nfor large values of B, P, and M using an efficient algorithm. (That's right, this problem has a time dependency !!!.)\n\nInput\n─────\nThree integer values (in the order B, P, M) will be read one number per line. B and P are integers in the range 0 to 2147483647 inclusive. M is an integer in the range 1 to 46340 inclusive.\n\nOutput\n──────\nThe result of the computation. A single integer.\n\nSample Input\n────────────\n    3\n    18132\n    17\n\n    17\n    1765\n    3\n\n    2374859\n    3029382\n    36123\n\nSample Output\n─────────────\n    13\n    2\n    13195\n\nHint\n────\n\n- (A*B)%C = (A%C) * (B%C)\n\n- (BP)%M = (BP/2%M) * (BP/2%M)",
   "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=22151&cid=5"
 }

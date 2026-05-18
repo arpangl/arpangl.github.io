@@ -24,6 +24,7 @@ BASE_URL = "https://gpe-helper.setsal.dev"
 DEFAULT_OUTPUT = Path(__file__).resolve().parent / "problem_statements.json"
 DEFAULT_PROBLEMS_DIR = Path(__file__).resolve().parent / "problems"
 USER_AGENT = "Mozilla/5.0 (compatible; GPE-Helper-Fetcher/1.0)"
+UNDERLINE_CHAR = chr(0x2500)  # ─
 
 
 def fetch_json(url: str, timeout: float, retries: int = 3, backoff: float = 0.35) -> dict:
@@ -54,6 +55,7 @@ def fetch_json(url: str, timeout: float, retries: int = 3, backoff: float = 0.35
 
 
 def html_to_text(content: str) -> str:
+    """Legacy flat-text converter (kept for backward compatibility)."""
     text = content.replace("\r", "\n")
     text = re.sub(r"(?is)<script.*?>.*?</script>", "", text)
     text = re.sub(r"(?is)<style.*?>.*?</style>", "", text)
@@ -63,18 +65,102 @@ def html_to_text(content: str) -> str:
     text = re.sub(r"(?s)<[^>]+>", "", text)
     text = html.unescape(text)
     text = text.replace("\u00a0", " ")
-
-    lines = []
-    for line in text.splitlines():
-        cleaned = re.sub(r"[ \t]+", " ", line).strip()
-        if cleaned:
-            lines.append(cleaned)
-
+    lines = [re.sub(r"[ \t]+", " ", line).strip() for line in text.splitlines()]
+    lines = [l for l in lines if l]
     deduped = []
     for line in lines:
         if not deduped or line != deduped[-1]:
             deduped.append(line)
     return "\n".join(deduped).strip()
+
+
+def _strip_tags(s: str) -> str:
+    return re.sub(r"(?s)<[^>]+>", "", s)
+
+
+def _clean_inline(s: str) -> str:
+    s = re.sub(r"(?i)<br\s*/?>", "\n", s)
+    s = _strip_tags(s)
+    s = html.unescape(s).replace("\u00a0", " ")
+    s = re.sub(r"[ \t]+", " ", s).strip()
+    return s
+
+
+def _format_sample_block(block: str) -> str:
+    labels = [_clean_inline(m) for m in re.findall(r"(?is)<h3[^>]*>(.*?)</h3>", block)]
+    pres = re.findall(r"(?is)<pre[^>]*>(.*?)</pre>", block)
+    if not pres:
+        return ""
+    out = []
+    for idx, pre in enumerate(pres):
+        label = labels[idx] if idx < len(labels) else f"Sample {idx + 1}"
+        raw = _strip_tags(pre)
+        raw = html.unescape(raw).replace("\r\n", "\n").replace("\r", "\n")
+        raw = raw.strip("\n")
+        indented = "\n".join("    " + line.rstrip() for line in raw.split("\n"))
+        underline = UNDERLINE_CHAR * max(len(label), 4)
+        out.append(f"\n{label}\n{underline}\n{indented}\n")
+    return "\n".join(out)
+
+
+def html_to_formatted_text(content: str) -> str:
+    """Convert problem-snapshot HTML into readable plain text.
+
+    Layout: section headers underlined with \u2500, sample I/O indented as code blocks.
+    Designed to render well under CSS `white-space: pre-wrap`.
+    """
+    text = content
+
+    # Drop trailing "Source / URL / Keyword" metadata table (always preceded by <hr />).
+    text = re.sub(
+        r"(?is)<hr\s*/?>\s*<table(?:(?!</table>).)*?Source:.*?</table>",
+        "",
+        text,
+    )
+
+    # Title (<h2>) and "Time Limit: \u2026" are already captured as metadata.
+    text = re.sub(r"(?is)<h2[^>]*>.*?</h2>", "", text)
+    text = re.sub(r"(?i)Time Limit:\s*[^<\n]*", "", text)
+
+    # Sample input/output table \u2192 labeled indented blocks.
+    text = re.sub(
+        r'(?is)<div id="sampleinputoutput">.*?</div>',
+        lambda m: _format_sample_block(m.group(0)),
+        text,
+    )
+
+    # Section headers (Description / Input / Output / \u2026)
+    def _h3(match: re.Match) -> str:
+        title = _clean_inline(match.group(1))
+        if not title:
+            return ""
+        underline = UNDERLINE_CHAR * max(len(title), 4)
+        return f"\n\n{title}\n{underline}\n"
+
+    text = re.sub(r"(?is)<h3[^>]*>(.*?)</h3>", _h3, text)
+
+    # Block boundaries \u2192 newlines.
+    text = re.sub(r"(?i)<br\s*/?>", "\n", text)
+    text = re.sub(r"(?i)</p\s*>", "\n\n", text)
+    text = re.sub(r"(?i)</(div|h4|h5|h6|tr|table|ul|ol)>", "\n", text)
+    text = re.sub(r"(?i)<li[^>]*>", "- ", text)
+    text = re.sub(r"(?i)</li>", "\n", text)
+    text = re.sub(r"(?i)<hr\s*/?>", "\n", text)
+
+    text = _strip_tags(text)
+    text = html.unescape(text).replace("\u00a0", " ")
+
+    # Collapse spaces per line but preserve sample-block indentation.
+    out_lines = []
+    for line in text.split("\n"):
+        if line.startswith("    "):
+            out_lines.append(line.rstrip())
+        else:
+            out_lines.append(re.sub(r"[ \t]+", " ", line).strip())
+
+    result = "\n".join(out_lines)
+    result = re.sub(r"\n{3,}", "\n\n", result)
+    return result.strip()
 
 
 def extract_problem_url(content: str) -> Optional[str]:
@@ -113,7 +199,7 @@ def fetch_one(pid: str, base_url: str, timeout: float):
     content = payload.get("content", "")
     if not isinstance(content, str) or not content.strip():
         raise ValueError("content field is empty")
-    description = html_to_text(content)
+    description = html_to_formatted_text(content)
     if not description:
         raise ValueError("description parsed as empty")
     problem_url = extract_problem_url(content) or f"{base_url.rstrip('/')}/problems/{pid}"

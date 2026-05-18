@@ -3,6 +3,6 @@
   "name": "Tight words",
   "time_limit": 3.0,
   "category": [],
-  "description": "10637:Tight words\nTime Limit: 30 sec\nDescription\nProblem: Tight words\nProblem B: Tight words\nGiven is an alphabet {0, 1, ... , k}, 0 <= k <= 9 .\nWe say that a word of length n over this alphabet is\ntight if any two neighbour digits in the word do not differ\nby more than 1.\nInput is a sequence of lines, each line contains two integer numbers\nk and n, 1 <= n <= 100. For each\nline of input, output the percentage of tight words of length\nn over the alphabet {0, 1, ... , k} with 5 fractional digits.\nSample input\n4 1\n2 5\n3 5\n8 7\nOutput for the sample input\n100.00000\n40.74074\n17.38281\n0.10130\nSource: http://uva.onlinejudge.org/external/100/10081.html\nKeyword:DP",
+  "description": "Description\n───────────\nProblem: Tight words\n\nGiven is an alphabet {0, 1, ... , k}, 0 <= k <= 9 .\nWe say that a word of length n over this alphabet is\ntight if any two neighbour digits in the word do not differ\nby more than 1.\n\nInput is a sequence of lines, each line contains two integer numbers\nk and n, 1 <= n <= 100. For each\nline of input, output the percentage of tight words of length\nn over the alphabet {0, 1, ... , k} with 5 fractional digits.\n\nSample input\n────────────\n\n4 1\n2 5\n3 5\n8 7\n\nOutput for the sample input\n───────────────────────────\n\n100.00000\n40.74074\n17.38281\n0.10130",
   "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=10637&cid=5"
 }
