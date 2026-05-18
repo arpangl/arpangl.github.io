@@ -1,0 +1,33 @@
+   1. 0
+   2. 1
+   3. 2
+   4. 3
+   5. 99
+   6. 1 shata
+   7. 1 shata 1
+   8. 9 shata 99
+   9. 1 hajar
+  10. 1 hajar 1
+  11. 9 hajar 9 shata 99
+  12. 10 hajar
+  13. 99 hajar 9 shata 99
+  14. 1 lakh
+  15. 9 lakh 99 hajar 9 shata 99
+  16. 10 lakh
+  17. 99 lakh 99 hajar 9 shata 99
+  18. 1 kuti
+  19. 9 kuti 99 lakh 99 hajar 9 shata 99
+  20. 10 kuti
+  21. 99 kuti 99 lakh 99 hajar 9 shata 99
+  22. 1 shata kuti
+  23. 9 shata 99 kuti 99 lakh 99 hajar 9 shata 99
+  24. 1 hajar kuti
+  25. 9 hajar 9 shata 99 kuti 99 lakh 99 hajar 9 shata 99
+  26. 10 hajar kuti
+  27. 99 hajar 9 shata 99 kuti 99 lakh 99 hajar 9 shata 99
+  28. 1 lakh kuti
+  29. 9 lakh 99 hajar 9 shata 99 kuti 99 lakh 99 hajar 9 shata 99
+  30. 10 lakh kuti
+  31. 99 lakh 99 hajar 9 shata 99 kuti 99 lakh 99 hajar 9 shata 99
+  32. 1 kuti kuti
+  33. 9 kuti 99 lakh 99 hajar 9 shata 99 kuti 99 lakh 99 hajar 9 shata 99

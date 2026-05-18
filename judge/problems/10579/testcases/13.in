@@ -1,0 +1,14 @@
+5 4
+manage 100
+budget 200
+skill 50
+lead 300
+team 150
+manage budget skill lead team
+.
+manage
+.
+skill skill skill
+.
+lead team budget
+.

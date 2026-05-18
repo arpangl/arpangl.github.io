@@ -1,0 +1,6 @@
+services:
+  judge-server:
+    build: .
+    ports:
+      - "5269:5269"
+    restart: unless-stopped

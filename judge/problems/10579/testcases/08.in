@@ -1,0 +1,8 @@
+3 2
+supervise 1000000
+control 999999
+plan 500000
+supervise and control the plan
+.
+supervise supervise supervise control control plan plan plan
+.
