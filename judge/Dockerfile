@@ -7,7 +7,7 @@ RUN apt-get update && \
 WORKDIR /app
 
 COPY judge.py server.py problems_list.json ./
-COPY web/ ./web/
+COPY index.html app.js judge-worker.js styles.css ./
 COPY problems/ ./problems/
 
 EXPOSE 5269

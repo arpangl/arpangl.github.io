@@ -1,12 +1,12 @@
 const dataApi = {
   async getManifest() {
-    const res = await fetch("/problems_manifest.json", { cache: "no-store" });
+    const res = await fetch("./problems_manifest.json", { cache: "no-store" });
     return handleJsonResponse(res);
   },
   async getTestcase(pid, testcaseName, ext) {
     const safePid = encodeURIComponent(pid);
     const safeCase = encodeURIComponent(testcaseName);
-    const res = await fetch(`/problems/${safePid}/testcases/${safeCase}.${ext}`, {
+    const res = await fetch(`./problems/${safePid}/testcases/${safeCase}.${ext}`, {
       cache: "no-store",
     });
     return handleTextResponse(res);

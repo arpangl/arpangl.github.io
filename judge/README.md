@@ -25,7 +25,7 @@ python3 -m http.server 5269
 開啟：
 
 ```text
-http://127.0.0.1:5269/web/
+http://127.0.0.1:5269/
 ```
 
 ### 3. 純前端模式語言支援
@@ -63,11 +63,10 @@ judge/
 ├── build_frontend_manifest.py  # 產生純前端索引
 ├── problems_manifest.json      # 純前端題庫索引（生成檔）
 ├── problems/                   # 題目與測資
-├── web/
-│   ├── index.html
-│   ├── styles.css
-│   ├── app.js
-│   └── judge-worker.js         # 瀏覽器端批改 worker
+├── index.html                  # 前端入口
+├── styles.css
+├── app.js
+├── judge-worker.js             # 瀏覽器端批改 worker
 ├── judge.py                    # CLI judge（後端模式）
 └── server.py                   # Web API（後端模式）
 ```

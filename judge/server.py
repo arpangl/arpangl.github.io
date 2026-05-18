@@ -27,7 +27,7 @@ import judge as judge_core
 
 
 BASE_DIR = Path(__file__).resolve().parent
-WEB_DIR = BASE_DIR / "web"
+WEB_DIR = BASE_DIR
 PROBLEMS_DIR = BASE_DIR / "problems"
 PROBLEMS_LIST_FILE = BASE_DIR / "problems_list.json"
 MAX_CODE_SIZE = 200_000
