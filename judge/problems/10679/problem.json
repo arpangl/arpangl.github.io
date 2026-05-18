@@ -1,1 +1,8 @@
-{"pid": "10679", "name": "Irreducible Basic Fractions", "time_limit": 3.0, "category": []}
+{
+  "pid": "10679",
+  "name": "Irreducible Basic Fractions",
+  "time_limit": 3.0,
+  "category": [],
+  "description": "10679:Irreducible Basic Fractions\nTime Limit: 4 sec\nDescription\nA fraction m / n is basic if m < n and it is irreducible if gcd(m, n) = 1. Given a positive integer n, in this problem you are required to find out the number of irreducible basic fractions with denominator n .\nFor example, the set of all basic fractions with denominator 12, before reduction to lowest terms, is\nReduction yields\nHence there are only the following 4 irreducible basic fractions with denominator 12\nInput\nEach line of the input contains a positive integer n (< 1000000000) and the input terminates with a value 0 for n (do not process this terminating value).\nOutput\nFor each n in the input print a line containing the number of irreducible basic fractions with denominator n\nSample Input\n12\n123456\n7654321\n0\nSample Output\n4\n41088\n7251444\nRezaul Alam Chowdhury\n“I shot an arrow into the air,\nIt fell to earth, I knew not where;\nFor, so swiftly it flew, the sight\nCould not follow it in its flight.\nI breathed a song into the air,\nIt fell to earth, I knew not where;\nFor who has sight so keen and strong,\nThat it can follow the flight of song?\nLong, Long afterward, in an oak\nI found the arrow, still unbroke;\nAnd the song from beginning to end,\nI found again in the heart of a friend.”\nSource: http://uva.onlinejudge.org/external/101/10179.html\nKeyword:number theory",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=10679&cid=5"
+}

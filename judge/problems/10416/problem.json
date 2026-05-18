@@ -1,1 +1,10 @@
-{"pid": "10416", "name": "Last Digit", "time_limit": 3.0, "category": ["數學"]}
+{
+  "pid": "10416",
+  "name": "Last Digit",
+  "time_limit": 3.0,
+  "category": [
+    "數學"
+  ],
+  "description": "10416:Last Digit\nTime Limit: 3 sec\nDescription\nGive you a integer number N (1<=n<=2*10100). Please compute\nS=11+22+33+…+NN\nGive the last digit of S to me.\nInput\nInput file consists of several Ns, each N a line. It is ended with N=0.\nOutput\nFor each N give a line containing only one digit, which is the last digit of S.\nSample Input\nSample Output\nDownload Sample Input/Output\n1\n2\n3\n0\n1\n5\n2\ninput, output\nSource: http://uva.onlinejudge.org/external/101/10162.html\nKeyword:",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=10416&cid=5"
+}

@@ -1,0 +1,8 @@
+{
+  "pid": "10610",
+  "name": "Curling up the cube",
+  "time_limit": 3.0,
+  "category": [],
+  "description": "10610:Curling up the cube\nTime Limit: 3 sec\nDescription\nA paper cube can be made up from six paper squares Given an projection (map) of the cube, you are to determine its correctness. A projection is correct, if a cube can be made up from it.\nInput\nThe first line is the number of test cases, followed by a blank line.\nInput for each test case, contains a projection represented as a 6*6 grid containing six ones and 30 zeroes, separated by spaces. 1s represent the paper squares. All squares are placed immediately to each other, so that each square is connected with at least one other square.\nEach test case will be separated by a single line.\nOutput\nFor each test case, your program should print \"correct\" if cube can be made up from the given project, or \"incorrect\" otherwise.\nPrint a blank line between the outputs for two consecutive test cases.\nSample Input\nSample Output\n2\n0 0 0 0 0 0\n0 0 0 1 0 0\n0 0 1 1 1 0\n0 0 0 1 0 0\n0 0 0 0 0 0\n0 0 0 1 1 0\n0 0 1 1 0 0\n0 0 0 1 1 0\n0 0 0 0 0 0\ncorrect\nincorrect\nSource: http://uva.onlinejudge.org/external/100/10024.html\nKeyword:DFS,ad hoc,graph theory",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=10610&cid=5"
+}

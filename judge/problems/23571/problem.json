@@ -1,1 +1,11 @@
-{"pid": "23571", "name": "Smith Numbers", "time_limit": 3.0, "category": ["質因數分解", "質數"]}
+{
+  "pid": "23571",
+  "name": "Smith Numbers",
+  "time_limit": 3.0,
+  "category": [
+    "質因數分解",
+    "質數"
+  ],
+  "description": "23571:Smith Numbers\nTime Limit: 3 sec\nBackground\nWhile skimming his phone directory in 1982, Albert Wilansky, a mathematician of Lehigh University , noticed that the telephone number of his brother-in-law H. Smith had the following peculiar property: The sum of the digits of that number was equal to the sum of the digits of the prime factors of that number. Got it? Smith's telephone number was 493-7775. This number can be written as the product of its prime factors in the following way:\nThe sum of all digits of the telephone number is 4+9+3+7+7+7+5=42, and the sum of the digits of its prime factors is equally 3+5+5+6+5+8+3+7=42. Wilansky was so amazed by his discovery that he named this type of numbers after his brother-in-law: Smith numbers.\nAs this observation is also true for every prime number, Wilansky decided later that a (simple and unsophisticated) prime number is not worth being a Smith number and he excluded them from the definition.\nDescription\nWilansky published an article about Smith numbers in the Two Year College Mathematics Journal and was able to present a whole collection of different Smith numbers: For example, 9985 is a Smith number and so is 6036. However, Wilansky was not able to give a Smith number which was larger than the telephone number of his brother-in-law. It is your task to find Smith numbers which are larger than 4937775.\nInput\nThe input consists of several test cases, the number of which you are given in the first line of the input.\nEach test case consists of one line containing a single positive integer smaller than 109.\nOutput\nFor every input value n, you are to compute the smallest Smith number which is larger than n and print each number on a single line. You can assume that such a number exists.\nSample Input\nSample Output\n2\n4937774\n456456\n4937775\n456502\nSource: http://uva.onlinejudge.org/external/100/10042.html\nAuthor: Miguel Revilla\nKeyword:",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=23571&cid=5"
+}

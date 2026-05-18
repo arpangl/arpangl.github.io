@@ -1,1 +1,8 @@
-{"pid": "24731", "name": "Roads in the North", "time_limit": 3.0, "category": []}
+{
+  "pid": "24731",
+  "name": "Roads in the North",
+  "time_limit": 3.0,
+  "category": [],
+  "description": "24731:Roads in the North\nTime Limit: 2 sec\nDescription\nBuilding and maintaining roads among communities in the far North is an expensive business. With this in mind, the roads are built in such a way that there is only one route from a village to a village that does not pass through some other village twice.\nGiven is an area in the far North comprising a number of villages and roads among them such that any village can be reached by road from any other village. Your job is to find the road distance between the two most remote villages in the area.\nThe area has up to 10,000 villages connected by road segments. The villages are numbered from 1.\nInput\nThe input contains several sets of input. Each set of input is a sequence of lines, each containing three positive integers: the number of a village, the number of a different village, and the length of the road segment connecting the villages in kilometers. All road segments are two-way. Two consecutive sets are separated by a blank line.\nOutput\nFor each set of input, you are to output a single line containing a single integer: the road distance between the two most remote villages in the area.\nSample Input\nSample Output\nDownload Sample Input/Output\n5 1 6\n1 4 5\n6 3 9\n2 6 8\n6 1 7\n22\ninput, output\nSource: http://uva.onlinejudge.org/external/103/10308.html\nAuthor: University of Alberta Local Contest\nKeyword:",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=24731&cid=5"
+}

@@ -1,0 +1,8 @@
+{
+  "pid": "10732",
+  "name": "Snow Clearing",
+  "time_limit": 3.0,
+  "category": [],
+  "description": "10732:Snow Clearing\nTime Limit: 30 sec\nDescription\nAs the days become shorter and the nights become longer we turn our thoughts to snow clearing. Due to budget cuts, the Big Noisy City has exactly one snow plow. The plow can clear exactly one lane of a road in a single pass. Whenever there is snow on the ground, the plow departs from its hangar and tours the city, plowing as it goes. What is the minimum time that the plow needs to clear every lane of every road?\nThe first line of input is the number of test cases, followed by a blank line. Then the input contains two integers: the x,y coordinates of the hangar (in metres). Up to 100 lines follow. Each gives the coordinates (in metres) of the beginning and end of a street. All roads are perfectly straight, with one lane in each direction. The plow can turn any direction (including a U-turn) at any intersection, and can turn around at the end of any street. The plow travels at 20 km/h if it is plowing, and 50 km/h if the lane it is driving on has already been plowed. It is possible to reach all streets from the hangar. There is a blank line between each consecutive test case.\nYour output should be the time, in hours and minutes, required to clear the streets and return to the hangar. Round to the nearest minute for each data set. Print a blank line between 2 consecutive data sets.\nSample Input\n1\n0 0\n0 0 10000 10000\n5000 -10000 5000 10000\n5000 10000 10000 10000\nOutput for Sample Input\n3:55\nSource: http://uva.onlinejudge.org/external/102/10203.html\nKeyword:graph theory",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=10732&cid=5"
+}

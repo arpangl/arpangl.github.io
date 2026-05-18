@@ -1,1 +1,11 @@
-{"pid": "11028", "name": "Digit Primes", "time_limit": 3.0, "category": ["區間問題", "質數"]}
+{
+  "pid": "11028",
+  "name": "Digit Primes",
+  "time_limit": 3.0,
+  "category": [
+    "區間問題",
+    "質數"
+  ],
+  "description": "11028:Digit Primes\nTime Limit: 4 sec\nDescription\nProblem C\nDigit Primes\nInput: Standard Input\nOutput: Standard Output\nTime Limit: 4 Seconds\nA prime number is a positive\nnumber, which is divisible by exactly two different integers. A digit prime is a\nprime number whose sum of digits is also prime. For example the prime number 41\nis a digit prime because 4+1=5 and 5 is a prime number. 17\nis not a digit prime because 1+7 = 8, and 8 is not a prime\nnumber. In this problem your job is to find out the number of digit primes\nwithin a certain range less than 1000000.\nInput\nFirst line of the input file contains a single integer N\n(0<N<=500000) that indicates the total number of inputs. Each of the\nnext N lines contains two integers t1 and t2 (0<t1<=t2<1000000).\nOutput\nFor each line of input except the first\nline produce one line of output containing a single integer that indicates the\nnumber of digit primes between t1 and t2 (inclusive).\nSample Input\n3\n10 20\n10 100\n100 10000\n1\n10\n576\nProblemsetter:\nShahriar Manzoor, Member of Elite Problemsetters' Panel\n/*Note: You\nshould at least use scanf() and printf() to take input and produce output for\nthis problem. cin and cout is too slow for this problem to get it within time\nlimit.*/\nSource: http://uva.onlinejudge.org/external/105/10533.html\nKeyword:number theory,sieve",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=11028&cid=5"
+}

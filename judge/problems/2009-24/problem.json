@@ -1,1 +1,8 @@
-{"pid": "2009-24", "name": "Unique lines", "time_limit": 3.0, "category": []}
+{
+  "pid": "2009-24",
+  "name": "Unique lines",
+  "time_limit": 3.0,
+  "category": [],
+  "description": "2009-24:Unique lines\nTime Limit: 11 sec\nDescription\nGiven a set of points, every pair of points can determine a line. In principle, we can generate N(N-1)/2 lines when there are N points(N < 100). However, it is possible that not all the lines are unique. For example, the three points (0,0), (1,1) and (2,2) give only one unique line. Given a set of points, the task here is to determine the number of unique lines.\nInput\nThe first line is the number of test cases. Each subsequent line is a test case and contains a series of numbers. The first number is the number of points. Each subsequent pair of numbers is the x and y coordinates of a point. You can assume that all the numbers are integers and all the points in a test case are distinct.\nOutput\nFor each test case, determine and print out the number of unique lines in a separate line.\nSample Input\nSample Output\n2\n7 0 0 1 1 2 2 3 3 4 4 6 6 0 3\n5 0 0 1 1 1 -1 -1 1 -1 -1\n7\n6\nKeyword:",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=2009-24&cid=5"
+}

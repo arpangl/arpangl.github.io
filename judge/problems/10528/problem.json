@@ -1,1 +1,8 @@
-{"pid": "10528", "name": "Light, more light", "time_limit": 3.0, "category": []}
+{
+  "pid": "10528",
+  "name": "Light, more light",
+  "time_limit": 3.0,
+  "category": [],
+  "description": "10528:Light, more light\nTime Limit: 3 sec\nDescription\nThere is man named \"mabu\" for switching on-off light in our University. He switches on-off the lights in a corridor. Every bulb has its own toggle switch. That is, if it is pressed then the bulb turns on. Another press will turn it off. To save power consumption (or may be he is mad or something else) he does a peculiar thing. If in a corridor there is `n' bulbs, he walks along the corridor back and forth `n' times and in i'th walk he toggles only the switches whose serial is divisable by i. He does not press any switch when coming back to his initial position. A i'th walk is defined as going down the corridor (while doing the peculiar thing) and coming back again.\nNow you have to determine what is the final condition of the last bulb. Is it on or off?\nInput\nThe input will be an integer indicating the n'th bulb in a corridor. Which is less then or equals 2^32-1. A zero indicates the end of input. You should not process this input.\nOutput\nOutput \"yes\" if the light is on otherwise \"no\" , in a single line.\nSample Input\nSample Output\n3\n6241\n8191\n0\nno\nyes\nno\nSource: http://uva.onlinejudge.org/external/101/10110.html\nAuthor: Sadi Khan Suman Mahbub 01-04-2\nKeyword:number theory",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=10528&cid=5"
+}

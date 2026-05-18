@@ -1,1 +1,8 @@
-{"pid": "25081", "name": "Solving Maze Problems", "time_limit": 3.0, "category": []}
+{
+  "pid": "25081",
+  "name": "Solving Maze Problems",
+  "time_limit": 3.0,
+  "category": [],
+  "description": "25081:Solving Maze Problems\nTime Limit: 10 sec\nDescription\nYou are asked to navigate a maze. Initially, you are placed at a certain position (the starting position)\nin the maze and is asked to try to reach another position (the goal position). Positions in the maze will\neither be open or blocked with an obstacle. Positions are identified by (x,y) coordinates.\nThere are some rules in this problem:\n1. The size of a maze map size is 10 x 10.\n2. The starting and the goal positions can be anywhere in the map.\n3. At any moment, you can only move 1 step in one of 4 directions. Valid directions are: East, West,\nSouth, North.\n4. You can only move to positions without obstacles and must stay within the maze.\n5. You have to mark the solution path with ‘+’ in the maze, and DO NOT mark the path which\ndoes not lead to the goal position.\n6. If there is no solution path, just output “No solution”.\nTechnical Specification\nTo make this problem more concrete, we will consider the maze represented by a matrix of characters.\nA maze includes:\n1. A starting position: ‘S’, position where you start.\n2. A goal position: ‘G’, goal position.\n3. Obstacles: ‘#’, positions where you cannot move to.\n4. Open positions: ‘.’, positions where you can move to.\n5. Footprints: ‘+’ , footprints you made.\nNote that each of an input maze has only one solution path.\nOutput\nThere is an empty line at the end of output.\nSample Input\nSample Output\nS..#######\n##.......#\n#####.####\n.#........\n#####.####\n#####.....\n.#....####\n###.#.....\n#########G\n+++#######\n##++++...#\n#####+####\n.#...+....\n#####+####\n#####+....\n.#...+####\n###.#+++++\n#########+\nKeyword:",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=25081&cid=5"
+}

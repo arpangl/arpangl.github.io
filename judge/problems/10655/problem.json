@@ -1,1 +1,8 @@
-{"pid": "10655", "name": "Sumsets", "time_limit": 3.0, "category": []}
+{
+  "pid": "10655",
+  "name": "Sumsets",
+  "time_limit": 3.0,
+  "category": [],
+  "description": "10655:Sumsets\nTime Limit: 30 sec\nDescription\nGiven S, a set of integers, find the largest d such that a + b + c = d where a, b, c, and d are distinct elements of S.\nInput\nSeveral S, each consisting of a line containing an integer 1 ≤ n ≤ 1000 indicating the number of elements in S, followed by the elements of S, one per line. Each element of S is a distinct integer between -536870912 and +536870911 inclusive. The last line of input contains 0.\nOutput\nFor each S, a single line containing d, or a single line containing \"no solution\".\nSample Input\nSample Output\n5\n2\n3\n5\n7\n12\n5\n2\n16\n64\n256\n1024\n0\n12\nno solution\nSource: http://uva.onlinejudge.org/external/101/10125.html\nKeyword:sorting,brute force,level1",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=10655&cid=5"
+}

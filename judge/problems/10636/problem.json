@@ -1,0 +1,8 @@
+{
+  "pid": "10636",
+  "name": "Gopher II",
+  "time_limit": 3.0,
+  "category": [],
+  "description": "10636:Gopher II\nTime Limit: 30 sec\nDescription\nProblem A: Gopher II\nThe gopher family, having averted the canine threat, must face a new\npredator.\nThe are n gophers and m gopher holes, each at distinct\n(x, y) coordinates. A hawk arrives and if a gopher does not reach a\nhole in s seconds it is vulnerable to being eaten. A hole can\nsave at most one gopher. All the gophers run at the same velocity v.\nThe gopher family needs an escape strategy that minimizes the number of\nvulnerable gophers.\nThe input contains several cases.\nThe first line of each case contains four positive integers less than 100:\nn, m, s, and v. The next n lines\ngive the coordinates of the gophers; the following m lines\ngive the coordinates of the gopher holes. All distances are in metres;\nall times are in seconds; all velocities are in metres per second.\nOutput consists of a single line for each case, giving the number of vulnerable\ngophers.\nSample Input\n2 2 5 10\n1.0 1.0\n2.0 2.0\n100.0 100.0\n20.0 20.0\nOutput for Sample Input\n1\nSource: http://uva.onlinejudge.org/external/100/10080.html\nKeyword:graph theory",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=10636&cid=5"
+}

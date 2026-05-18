@@ -1,1 +1,8 @@
-{"pid": "2015-01", "name": "Missing Numbers", "time_limit": 3.0, "category": []}
+{
+  "pid": "2015-01",
+  "name": "Missing Numbers",
+  "time_limit": 3.0,
+  "category": [],
+  "description": "2015-01:Missing Numbers\nTime Limit: 1 sec\nDescription\nYou are given multiple unsorted lists of numbers: the 1st list has N numbers, the 2nd list has (N–1) numbers, the 3rd list has (N–2) number, and the i-th list has (N–i+1) numbers. One and only one number in the i-th list is missing in the (i+1)-th list. Your task is to find the missing numbers from list to list.\nInput\nThe first line contains two numbers, M and N (M < N and M*N ≤ 5,000,000), where M is the number of lists and N is the number of integers in the 1st list. The following M lines are simply the M unsorted lists of integers, each list on a separate line and all integers smaller than 65,536.\nOutput\nPrint the missing numbers from list to list; in other words, print the number which is in the 1st list but not in the 2nd list, then the number which is in the 2nd list but not in the 3rd list, and so on so forth, each number on a separate line. Totally there will be (M–1) numbers printed.\nSample Input\nSample Output\nDownload Sample Input/Output\n3 5\n13766 1891 5370 24317 30676\n13766 5370 30676 24317\n24317 5370 13766\n1891\n30676\ninput, output\nHint\n- M and N can be huge - use \"scanf\" (instead of \"cin\") for reading input efficiently!\nKeyword:",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=2015-01&cid=5"
+}

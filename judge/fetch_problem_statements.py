@@ -11,7 +11,9 @@ import argparse
 import html
 import json
 import re
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Optional
 from urllib.error import HTTPError, URLError
@@ -87,18 +89,67 @@ def collect_problem_ids(problems_dir: Path, only_pid: Optional[str]) -> list[str
         return [only_pid]
     pids = []
     for problem_dir in sorted(problems_dir.iterdir()):
-        if problem_dir.is_dir() and (problem_dir / "problem.json").exists():
+        if problem_dir.is_dir() and not problem_dir.name.startswith("."):
             pids.append(problem_dir.name)
     return pids
+
+
+def load_name_map(problems_dir: Path) -> dict:
+    list_file = problems_dir.parent / "problems_list.json"
+    if not list_file.exists():
+        return {}
+    try:
+        data = json.loads(list_file.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+    if isinstance(data, list):
+        return {item.get("pid"): item.get("name", "") for item in data if isinstance(item, dict)}
+    return {}
+
+
+def fetch_one(pid: str, base_url: str, timeout: float):
+    snapshot_url = f"{base_url.rstrip('/')}/question_snapshots/contents/{pid}.json"
+    payload = fetch_json(snapshot_url, timeout=timeout)
+    content = payload.get("content", "")
+    if not isinstance(content, str) or not content.strip():
+        raise ValueError("content field is empty")
+    description = html_to_text(content)
+    if not description:
+        raise ValueError("description parsed as empty")
+    problem_url = extract_problem_url(content) or f"{base_url.rstrip('/')}/problems/{pid}"
+    return {"problem_url": problem_url, "description": description}
+
+
+def write_back_problem_json(problems_dir: Path, pid: str, info: dict, name_map: dict) -> None:
+    problem_dir = problems_dir / pid
+    if not problem_dir.exists():
+        return
+    pj = problem_dir / "problem.json"
+    if pj.exists():
+        try:
+            meta = json.loads(pj.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            meta = {}
+    else:
+        meta = {"pid": pid, "name": name_map.get(pid, ""), "time_limit": 3.0, "category": []}
+    meta["description"] = info["description"]
+    if not meta.get("url"):
+        meta["url"] = info["problem_url"]
+    pj.write_text(
+        json.dumps(meta, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
 
 def main():
     parser = argparse.ArgumentParser(description="Fetch GPE problem statements")
     parser.add_argument("--base-url", default=BASE_URL, help="Base URL of the source site")
-    parser.add_argument("--output", default=str(DEFAULT_OUTPUT), help="Output JSON path")
+    parser.add_argument("--output", default=str(DEFAULT_OUTPUT), help="Aggregated output JSON path")
     parser.add_argument("--problems-dir", default=str(DEFAULT_PROBLEMS_DIR), help="Local problems dir")
     parser.add_argument("--pid", default=None, help="Fetch only one problem id")
     parser.add_argument("--timeout", type=float, default=20.0, help="HTTP timeout seconds")
+    parser.add_argument("--workers", type=int, default=16, help="Parallel worker threads")
+    parser.add_argument("--no-write-back", action="store_true", help="Skip updating each problem.json")
     args = parser.parse_args()
 
     problems_dir = Path(args.problems_dir).resolve()
@@ -106,42 +157,43 @@ def main():
     pids = collect_problem_ids(problems_dir, args.pid)
     if not pids:
         raise SystemExit("No problem ids found.")
+    name_map = load_name_map(problems_dir)
 
-    statements = {}
-    ok_count = 0
-    skip_count = 0
-    err_count = 0
+    statements: dict = {}
+    counts = {"ok": 0, "skip": 0, "err": 0}
+    counts_lock = threading.Lock()
+    print_lock = threading.Lock()
 
-    for pid in pids:
-        snapshot_url = f"{args.base_url.rstrip('/')}/question_snapshots/contents/{pid}.json"
+    def task(pid: str):
         try:
-            payload = fetch_json(snapshot_url, timeout=args.timeout)
-            content = payload.get("content", "")
-            if not isinstance(content, str) or not content.strip():
-                raise ValueError("content field is empty")
-
-            description = html_to_text(content)
-            if not description:
-                raise ValueError("description parsed as empty")
-
-            problem_url = extract_problem_url(content) or f"{args.base_url.rstrip('/')}/problems/{pid}"
-            statements[pid] = {
-                "problem_url": problem_url,
-                "description": description,
-            }
-            ok_count += 1
-            print(f"[OK]   {pid}")
+            info = fetch_one(pid, args.base_url, args.timeout)
+            with counts_lock:
+                statements[pid] = info
+                counts["ok"] += 1
+            with print_lock:
+                print(f"[OK]   {pid}")
+            if not args.no_write_back:
+                write_back_problem_json(problems_dir, pid, info, name_map)
         except FileNotFoundError:
-            skip_count += 1
-            print(f"[SKIP] {pid} (snapshot not found)")
+            with counts_lock:
+                counts["skip"] += 1
+            with print_lock:
+                print(f"[SKIP] {pid} (snapshot not found)")
         except Exception as exc:
-            err_count += 1
-            print(f"[ERR]  {pid} ({exc})")
+            with counts_lock:
+                counts["err"] += 1
+            with print_lock:
+                print(f"[ERR]  {pid} ({exc})")
+
+    with ThreadPoolExecutor(max_workers=args.workers) as pool:
+        futures = [pool.submit(task, pid) for pid in pids]
+        for _ in as_completed(futures):
+            pass
 
     output = {
         "source": args.base_url.rstrip("/"),
         "count": len(statements),
-        "statements": statements,
+        "statements": dict(sorted(statements.items())),
     }
     output_path.write_text(
         json.dumps(output, ensure_ascii=False, indent=2) + "\n",
@@ -150,7 +202,7 @@ def main():
 
     print("\nDone.")
     print(f"Output: {output_path}")
-    print(f"Fetched: {ok_count}, Skipped: {skip_count}, Errors: {err_count}")
+    print(f"Fetched: {counts['ok']}, Skipped: {counts['skip']}, Errors: {counts['err']}")
 
 
 if __name__ == "__main__":

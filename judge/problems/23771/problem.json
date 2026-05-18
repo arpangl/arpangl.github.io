@@ -1,1 +1,8 @@
-{"pid": "23771", "name": "Lexicographic Order", "time_limit": 3.0, "category": []}
+{
+  "pid": "23771",
+  "name": "Lexicographic Order",
+  "time_limit": 3.0,
+  "category": [],
+  "description": "23771:Lexicographic Order\nTime Limit: 1 sec\nDescription\nThe alphabet of a certain alien language consists of n distinct symbols. The symbols are like the letters of English alphabet but their ordering is different. You want to know the original order of the symbols in that particular alphabet. You have a string consists of all the letters of that alphabet and you know that this is the k-th (1 based) lexicographic permutation of these symbols. You have to arrange these symbols in lexicographic order of that language.\nInput\nThe first line of input will contain an integer T (T ≤ 5000) which denotes the number of test cases.\nEach of the following T lines contains a string s and an integer k. The string will be of length n (1 ≤ n ≤ 20) and will consist of lowercase letters only. All the letters in the string will be distinct. The value of k will be in the range (1 ≤ k ≤ n!).\nOutput\nFor each line of input output the case number and a string which contains the letters in lexicographic order in that language.\nSample Input\nSample Output\nDownload Sample Input/Output\n3\nbdac 11\nabcd 5\nhjbrl 120\nCase 1: abcd\nCase 2: acdb\nCase 3: lrbjh\ninput, output\nHint\nThe first input resembles the original order of English alphabet. Here are the lexicographic permutations\nabcd\nabdc\nacbd\nacdb\nadbc\nadcb\nbacd\nbadc\nbcad\nbcda\nbdac\nbdca\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\ncabd\ncadb\ncbad\ncbda\ncdab\ncdba\ndabc\ndacb\ndbac\ndbca\ndcab\ndcba\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\nSource: http://uva.onlinejudge.org/external/123/12335.html\nKeyword:",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=23771&cid=5"
+}

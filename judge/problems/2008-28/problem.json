@@ -1,1 +1,11 @@
-{"pid": "2008-28", "name": "Longest monotonically increasing subsequence", "time_limit": 3.0, "category": ["DP", "LCS"]}
+{
+  "pid": "2008-28",
+  "name": "Longest monotonically increasing subsequence",
+  "time_limit": 3.0,
+  "category": [
+    "DP",
+    "LCS"
+  ],
+  "description": "2008-28:Longest monotonically increasing subsequence\nTime Limit: 30 sec\nDescription\nPlease find the longest monotonically increasing subsequence (LMIS) of a sequence of n numbers (each number m, 1≤ m ≤ 232-1)and indicate its length of the sequence. For example, the sequence\n2, 5, 3, 1, 6, 4\nhas three LMISs of length 3, namely,\n(2, 5, 6), (2, 3, 6), (2, 3, 4).\nInput\nFirst line in the input file indicates the number of input patterns. The first of the following two lines denotes the number of sequence elements n (1≤ n ≤ 9)and next denotes the sequence representing the individual test pattern. Every two numbers are separated by a space.\nOutput\nIn each output, you must point out the number of LMIS in the test pattern, and then output the possible LMIS below. Every two numbers are separated by a space. Please follow the format of the sample output.\nSample Input\nSample Output\n4\n6\n2 5 3 1 6 4\n9\n2 6 1 9 7 3 5 4 8\n7\n1 2 3 4 5 6 7\n7\n7 6 5 4 3 2 1\n3\n2 5 6\n2 3 6\n2 3 4\n5\n2 6 7 8\n2 3 5 8\n2 3 4 8\n1 3 5 8\n1 3 4 8\n1\n1 2 3 4 5 6 7\n7\n6\n5\n4\n3\n2\n1\nKeyword:",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=2008-28&cid=5"
+}

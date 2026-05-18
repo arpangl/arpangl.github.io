@@ -1,1 +1,10 @@
-{"pid": "24911", "name": "Robot Instructions", "time_limit": 3.0, "category": ["模擬"]}
+{
+  "pid": "24911",
+  "name": "Robot Instructions",
+  "time_limit": 3.0,
+  "category": [
+    "模擬"
+  ],
+  "description": "24911:Robot Instructions\nTime Limit: 3 sec\nDescription\nYou have a robot standing on the origin of x axis. The robot will be given some instructions. Your task is to predict its position after executing all the instructions.\n- LEFT: move one unit left (decrease p by 1, where p is the position of the robot before moving)\n- RIGHT: move one unit right (increase p by 1)\n- SAME AS i: perform the same action as in the i-th instruction. It is guaranteed that i is a positive integer not greater than the number of instructions before this.\nInput\nThe first line contains the number of test cases T (T≤100). Each test case begins with an integer n ( 1≤n≤100), the number of instructions. Each of the following n lines contains an instruction.\nOutput\nFor each test case, print the final position of the robot. Note that after processing each test case, the robot should be reset to the origin.\nSample Input\nSample Output\nDownload Sample Input/Output\n2\n3\nLEFT\nRIGHT\nSAME AS 2\n5\nLEFT\nSAME AS 1\nSAME AS 2\nSAME AS 1\nSAME AS 4\n1\n-5\ninput, output\nSource: http://uva.onlinejudge.org/external/125/12503.html\nAuthor: Rujia Liu, Special Thanks: Feng Chen, Md\nKeyword:",
+  "url": "https://gpe3.acm-icpc.tw/domjudge2/pct/showproblem.php?probid=24911&cid=5"
+}
